@@ -234,6 +234,9 @@ ul.cd-dropdown-content li {
     float: right;
     margin-top: 6px;
 }
+.my-account .my-account-meta a {
+    color:  inherit;
+}
 .my-account-meta {
     display: inline-block;
     vertical-align: super;
