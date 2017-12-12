@@ -122,7 +122,7 @@ ul.cd-dropdown-content li {
 }
 .header-search {
     float: left;
-    width: 55%;
+    width: 45%;
     text-align: center;
     margin: 1.6em 3em;
 }
@@ -232,8 +232,20 @@ ul.cd-dropdown-content li {
 /*-- //cart-box --*/
 .my-account {
     float: right;
-    margin: 1.4em 0;
-} 
+    margin-top: 6px;
+}
+.my-account-meta {
+    display: inline-block;
+    vertical-align: super;
+    margin-left: 10px;
+}
+.my-account-meta li:first-child {
+    color: #f44336;
+}
+.my-account-meta li:nth-child(2) {
+    font-weight: 900;
+    padding-left: 6px;
+}
 .my-account a {
     font-size: 1em;
     color: #000;
@@ -2171,7 +2183,31 @@ p.single-price-text {
 /*-- //single-page --*/
 /*-- cart --*/
 .cart {
-    
+    font-size: 14px;
+    margin-top: 6px;
+}
+.cart li {
+    display: inline-block;
+    list-style-type: none;
+}
+.cart-icon i {
+    font-size:40px;
+}
+.cart .cart-text {
+
+}
+.cart-meta {
+    display: inline-block;
+    margin-left: 5px;
+}
+.cart-meta li {
+    display: block;
+}
+.cart .cart-count {
+    padding: 0 10px;
+    background-color: #f44336;
+    color: #fff;
+    border-radius: 10px;
 }
 .logged-in-cart {
 
@@ -2253,7 +2289,7 @@ p.single-price-text {
     padding: 1em 0 1.3em; 
 }
 .header-search {
-    width: 52%;
+    width: 45%;
     margin: 2.2em 1em 1.2em;
 }
 #PPsbmincart { 
@@ -2278,6 +2314,13 @@ p.single-price-text {
 .header-cart { 
     margin: 2em 0 1em;
 } 
+}
+.header-cart .my-account i { 
+    font-size: 40px;
+}
+.header-cart .my-account li {
+    display: inline-block;
+}
 .glry-w3agile-grids .view-caption h5 {
     font-size: 1.2em; 
     width: 50px;
