@@ -119,6 +119,7 @@ ul.cd-dropdown-content li {
 }
 .header-logo {
     float: left; 
+    margin-top: -10px;
 }
 .header-search {
     float: left;
@@ -268,6 +269,101 @@ ul.cd-dropdown-content li {
 	transition: 0.5s all;
 }
 /*-- //header-two --*/
+/* dashboard */
+.side-menu,
+.dashboard-first__sec,
+.dashboard-second__sec {
+    border: 1px solid #D1CFCF;
+    overflow: hidden;
+}
+.side-menu li {
+    padding: 12px 10px;
+    display: block;
+    background: #ececec;
+}
+.side-menu h3 {
+    font-size: 18px;
+    margin: 10px;
+}
+.main-dashboard-page img {
+    max-width: 100%;
+}
+.main-dashboard-page {
+    overflow: hidden;
+}
+.btn.btn-danger {
+    background-color: #f44336;
+    border-color: #f44336
+}
+.btn.btn-info {
+    background-color: #0280e1;
+    border-color: #0280e1
+}
+.store-img {
+    padding-left: 10px;
+    border-radius: 50%;
+}
+.store-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.store-description {
+    margin-top: 15px;
+    line-height: 1.3;
+    padding-right: 20px;
+}
+.order-status {
+    background: #ececec;
+}
+.order-status li {
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #D1CFCF;
+}
+.order-status li:last-of-type {
+    border-right: none;
+}
+.order-status__count {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+}
+.dashboard-second__sec {
+    margin-top: 20px;
+}
+.order-image {
+    display: block;
+    padding-left: 20px;
+}
+.order-list .alert {
+    font-size: 12px;
+    padding: 5px;
+    position: absolute;
+}
+.order-list li {
+    border-bottom: 1px solid #D1CFCF;
+    padding: 10px;
+}
+.order-action-box .btn {
+    width: 100%;
+    margin-bottom: 2px;
+}
+.order-action-box .btn:last-child {
+    margin-bottom: none;
+}
+.order-list li:last-child {
+    border-bottom: none;
+}
+.order-quantity,
+.order-price  {
+    font-weight: bold;
+}
+.order-description {
+    font-size: 1.4em;
+}
+/* // dashboard */
 /*-- header-three --*/ 
 .header-three {
     border-bottom: 1px solid #eaeaea; 
@@ -305,7 +401,22 @@ ul.cd-dropdown-content li {
 }
 /*-- //menu --*/
 /*-- welcome --*/
-.welcome,.deals,.card-page,.help,.values,.privacy,.sitemap,.products,.related-products,.login-page,.contact,.about,.faq-w3agile,.wthree-offers,.w3l-services{
+.welcome,
+.deals,
+.card-page,
+.help,
+.values,
+.privacy,
+.sitemap,
+.products,
+.related-products,
+.login-page,
+.contact,
+.about,
+.faq-w3agile,
+.wthree-offers,
+.dashboard,
+.w3l-services{
 	padding:5em 0;
 } 
 h3.w3ls-title {
@@ -342,6 +453,27 @@ h3.w3ls-title {
 .welcome .bs-example-tabs ul.nav-tabs li a:focus{
 	text-decoration: none;
 } 
+.store-nav {
+    width: 100%;
+    display: block;
+}
+.dashboard-menu {
+    width: 100%;
+}
+.nav-item__selected {
+    background-color: #2438ba;
+    color: #fff;
+}
+.store-nav__item {
+    display: inline-block;
+    padding: 0 20px;
+    color: #fff;
+    font-family: 'Offside', cursive;
+    font-size: 1.1em;
+    line-height: 40px;
+    outline: none;
+    text-decoration: none;
+}
 .welcome .tabcontent-grids ul li {
     display: block;
     color: #999;
