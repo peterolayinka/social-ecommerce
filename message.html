@@ -1,480 +1,308 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Smart Bazaar an E-commerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Smart Bazaar Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- Custom Theme files -->
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/menu.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- menu style -->
-    <link href="css/ken-burns.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- banner slider -->
-    <link href="css/animate.min.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
-    <!-- carousel slider -->
-    <!-- //Custom Theme files -->
-    <!-- font-awesome icons -->
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <title>
+
+        Home · Application theme · Official Bootstrap Themes
+
+    </title>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="css/toolkit.css" type="text/css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
     <link href="css/font-awesome.css" rel="stylesheet">
-    <!-- //font-awesome icons -->
-    <!-- js -->
-    <script src="js/jquery-2.2.3.min.js"></script>
-    <!-- //js -->
-    <!-- web-fonts -->
-    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet'
-        type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Lovers+Quarrel' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Offside' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Tangerine:400,700' rel='stylesheet' type='text/css'>
-    <!-- web-fonts -->
-    <script src="js/owl.carousel.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#owl-demo").owlCarousel({
-                autoPlay: 3000, //Set AutoPlay to 3 seconds 
-                items: 4,
-                itemsDesktop: [640, 5],
-                itemsDesktopSmall: [480, 2],
-                navigation: true
 
-            });
-        }); 
-    </script>
-    <script src="js/jquery-scrolltofixed-min.js" type="text/javascript"></script>
-    <script>
-        $(document).ready(function () {
+    <link href="css/application.css" rel="stylesheet">
 
-            // Dock the header to the top of the window when scrolled past the banner. This is the default behaviour.
+    <link href="css/style.css" rel="stylesheet">
 
-            $('.header-two').scrollToFixed();
-            // previous summary up the page.
+    <style>
+        /* note: this is a hack for ios iframe for bootstrap themes shopify page */
 
-            var summaries = $('.summary');
-            summaries.each(function (i) {
-                var summary = $(summaries[i]);
-                var next = summaries[i + 1];
+        /* this chunk of css is not part of the toolkit :) */
 
-                summary.scrollToFixed({
-                    marginTop: $('.header-two').outerHeight(true) + 10,
-                    zIndex: 999
-                });
-            });
-        });
-    </script>
-    <!-- start-smooth-scrolling -->
-    <script type="text/javascript" src="js/move-top.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $(".scroll").click(function (event) {
-                event.preventDefault();
-                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
-            });
-        });
-    </script>
-    <!-- //end-smooth-scrolling -->
-    <!-- smooth-scrolling-of-move-up -->
-    <script type="text/javascript">
-        $(document).ready(function () {
+        body {
+            width: 1px;
+            min-width: 100%;
+            *width: 100%;
+        }
+    </style>
 
-            var defaults = {
-                containerID: 'toTop', // fading element id
-                containerHoverID: 'toTopHover', // fading element hover id
-                scrollSpeed: 1200,
-                easingType: 'linear'
-            };
-
-            $().UItoTop({ easingType: 'easeOutQuart' });
-
-        });
-    </script>
-    <!-- //smooth-scrolling-of-move-up -->
-    <script src="js/bootstrap.js"></script>
 </head>
 
-<body>
-    <!-- header -->
-    <div class="header">
-        <div class="w3ls-header">
-            <!--header-one-->
-            <div class="w3ls-header-right">
-                <ul>
-                    <li class="dropdown head-dpdn">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-user" aria-hidden="true"></i> My Account
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">My Order </a>
-                            </li>
-                            <li>
-                                <a href="#">Profile</a>
-                            </li>
-                            <li>
-                                <a href="#">Settings</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown head-dpdn">
-                        <a href="#" class="dropdown-toggle">
-                            <i class="fa fa-inbox" aria-hidden="true"></i> Message</a>
-                    </li>
-                    <li class="dropdown head-dpdn">
-                        <a href="#" class="dropdown-toggle">
-                            <i class="fa fa-shopping-basket" aria-hidden="true"></i> My Store</a>
-                    </li>
-                    <li class="dropdown head-dpdn">
-                        <a href="help.html" class="dropdown-toggle">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i> Help</a>
-                    </li>
-                    <li class="dropdown head-dpdn">
-                        <a href="#" class="dropdown-toggle">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        <div class="header-two">
-            <!-- header-two -->
-            <div class="container">
-                <div class="header-logo">
-                    <h1>
-                        <a href="index.html">
-                            <span>S</span>mart
-                            <i>Bazaar</i>
-                        </a>
-                    </h1>
-                    <h6>Your stores. Your place.</h6>
-                </div>
-                <div class="header-search">
-                    <form action="#" method="post">
-                        <input type="search" name="Search" placeholder="Search for a Product..." required="">
-                        <button type="submit" class="btn btn-default" aria-label="Left Align">
-                            <i class="fa fa-search" aria-hidden="true"> </i>
+
+<body class="bjy">
+
+    <div class="bkk" id="app-growl"></div>
+
+    <nav class="header ck mo zq mt qh app-navbar">
+
+        <a class="e" href="index.html">
+            <img src="img/brand-white.png" alt="brand">
+        </a>
+
+        <button class="mk blk se" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="ml"></span>
+        </button>
+
+        <div class="collapse f" id="navbarResponsive">
+            <ul class="navbar-nav adn">
+                <li class="md active">
+                    <a class="mb" href="index.html">Home
+                        <span class="zt">(current)</span>
+                    </a>
+                </li>
+                <li class="md">
+                    <a class="mb" href="profile.html">Profile</a>
+                </li>
+                <li class="md">
+                    <a class="mb" href="message.html">Messages</a>
+                </li>
+                <li class="md">
+                    <a class="mb" href="store.html">My Store</a>
+                </li>
+
+                <!-- <li class="md se">
+          <a class="mb" href="notifications/index.html">Notifications</a>
+        </li> -->
+                <!-- <li class="md se">
+          <a class="mb" data-action="growl">Growl</a>
+        </li> -->
+                <li class="md se">
+                    <a class="mb" href="login/index.html">Logout</a>
+                </li>
+
+            </ul>
+
+            <form class="kl zc ro sk">
+                <input class="form-control" data-action="grow" placeholder="Search" type="text">
+            </form>
+
+            <ul id="#js-popoverContent" class="nav navbar-nav zc aah ro sk">
+                <li class="md">
+                    <a class="g mb" href="#">
+                        <i class="fa fa-2x fa-cart-arrow-down" aria-hidden="true"></i>
+                        <span>2</span>
+                    </a>
+                </li>
+                <li class="md aax">
+                    <div class="dropdown">
+                        <button class="cg bll blm bkf dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <img class="rl" src="img/a6.png">
                         </button>
-                    </form>
-                </div>
-                <div class="header-cart">
-                    <div class="my-account">
-                        <ul>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li>
-                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <a class="dropdown-item" href="#">Action</a>
                             </li>
-                            <ul class="my-account-meta">
-                                <li>Hi, Peter</li>
-                            </ul>
-                        </ul>
-                    </div>
-                    <div class="cart">
-                        <ul>
-                            <li class="cart-icon">
-                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                            <li>
+                                <a class="dropdown-item" href="#">Another action</a>
                             </li>
-                            <ul class="cart-meta">
-                                <li class="cart-text">
-                                    Cart
-                                </li>
-                                <li class="cart-count">
-                                    <span>0</span>
-                                </li>
-                            </ul>
+                            <li>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </li>
+
+
                         </ul>
                     </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ro" id="js-popoverContent">
+                <li class="md">
+                    <a class="mb" href="#" data-action="growl">Growl</a>
+                </li>
+                <li class="md">
+                    <a class="mb" href="login/index.html">Logout</a>
+                </li>
+            </ul>
         </div>
-        <!-- //header-two -->
-        <div class="header-three">
-            <!-- header-three -->
-            <div class="container">
-                <div class="menu dashboard-menu">
-                    <div class="cd-dropdown-wrapper">
-                        <ul class="store-nav">
-                            <li class="store-nav__item">My Store</li>
-                            <!-- <li class="store-nav__item">My Orders</li> -->
-                            <li class="store-nav__item nav-item__selected">Store Chats</li>
-                            <li class="store-nav__item">Store Settings</li>
-                        </ul>
-                        <!-- .cd-dropdown -->
-                    </div>
-                    <!-- .cd-dropdown-wrapper -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- //header -->
-    <!-- help-page -->
-    <div class="dashboard">
-        <div class="container">
-            <div class="col-sm-3 col-md-2 side-menu__col">
-                
-            </div>
-            <div class="col-sm-9 col-md-10 main-dashboard-page__col">
-                <h3 class="w3ls-title w3ls-title1">My Store Chats</h3>
-                <div class="main-dashboard-page">
-                    <div class="row message-box__container">
-                        <div class="col-md-4">
-                            <ul class="message-list">
-                                <li class="row message-item unread-message">
-                                    <div class="message-item__image">
-                                        <img class="message-user__img" src="images/p2.png"> 
+    </nav>
+
+    <div class="by acy adh">
+        <div class="dp">
+            <div class="main-dashboard-page__col">
+
+                <div class="col-sm-12 col-md-12 ">
+                    <h3 class="message title">Messages</h3>
+                    <div class="main-dashboard-page">
+                        <div class="row message-box__container">
+                            <div class="col-md-4">
+                                <ul class="message-list">
+                                    <li class="row message-item unread-message">
+                                        <div class="message-item__image">
+                                            <img class="message-user__img" src="images/p2.png">
+                                        </div>
+                                        <div class="message-item__content">
+                                            <h4>Peter Olayinka</h4>
+                                            <p>Hello, do you have stocks?</p>
+                                        </div>
+                                    </li>
+                                    <li class="row message-item">
+                                        <div class="message-item__image">
+                                            <img class="message-user__img" src="images/p2.png">
+                                        </div>
+                                        <div class="message-item__content">
+                                            <h4>Tolani Ayaoba</h4>
+                                            <p>Hello, do you have stocks?</p>
+                                        </div>
+                                    </li>
+                                    <li class="row message-item">
+                                        <div class="message-item__image">
+                                            <img class="message-user__img" src="images/p2.png">
+                                        </div>
+                                        <div class="message-item__content">
+                                            <h4>Boluwafife Adeyemi</h4>
+                                            <p>Hello, do you have stocks?</p>
+                                        </div>
+                                    </li>
+                                    <li class="row message-item unread-message">
+                                        <div class="message-item__image">
+                                            <img class="message-user__img" src="images/p2.png">
+                                        </div>
+                                        <div class="message-item__content ">
+                                            <h4>Arinola Adeyinka</h4>
+                                            <p>Hello, do you have stocks?</p>
+                                        </div>
+                                    </li>
+                                    <li class="row message-item unread-message">
+                                        <div class="message-item__image">
+                                            <img class="message-user__img" src="images/p2.png">
+                                        </div>
+                                        <div class="message-item__content">
+                                            <h4>Adeola Tunji</h4>
+                                            <p>Hello, do you have stocks?</p>
+                                        </div>
+                                    </li>
+                                    <li class="row message-item active-message">
+                                        <div class="message-item__image">
+                                            <img class="message-user__img" src="images/p2.png">
+                                        </div>
+                                        <div class="message-item__content">
+                                            <h4>Adebanke Adeniyi</h4>
+                                            <p>Hello, do you have stocks?</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="message-content__box">
+                                    <div class="message-box">
+                                        <h3 class="message-content__title">Conversation with Adebanke Adeniyi</h3>
+                                        <ul class="row">
+                                            <li class="row message-content__item left-message__content">
+                                                <div class="message-content__image">
+                                                    <img class="message-user__img" src="images/p2.png">
+                                                </div>
+                                                <div class="message-content__content">
+                                                    <h4 class="message-content__user">Adebanke Adeniyi</h4>
+                                                    <div class="message-content__text">Hello, do you have stocks?</div>
+                                                </div>
+                                            </li>
+                                            <li class="row message-content__item right-message__content">
+                                                <div class="message-content__image">
+                                                    <img class="message-user__img" src="images/p2.png">
+                                                </div>
+                                                <div class="message-content__content">
+                                                    <h4 class="message-content__user">Adebanke Adeniyi</h4>
+                                                    <div class="message-content__text">Hello, do you have stocks?</div>
+                                                </div>
+                                            </li>
+                                            <li class="row message-content__item right-message__content">
+                                                <div class="message-content__image">
+                                                    <img class="message-user__img" src="images/p2.png">
+                                                </div>
+                                                <div class="message-content__content">
+                                                    <h4 class="message-content__user">Adebanke Adeniyi</h4>
+                                                    <div class="message-content__text">Hello, do you have stocks?</div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <div class="message-item__content">
-                                        <h4>Peter Olayinka</h4>
-                                        <p>Hello, do you have stocks?</p>
+                                    <div class="message-text__field">
+                                        <textarea class="message-text__box"></textarea>
+                                        <button type="submit" class="btn btn-danger message-text__send">
+                                            Send
+                                        </button>
                                     </div>
-                                </li>
-                                <li class="row message-item">
-                                    <div class="message-item__image">
-                                        <img class="message-user__img" src="images/p2.png"> 
-                                    </div>
-                                    <div class="message-item__content">
-                                        <h4>Tolani Ayaoba</h4>
-                                        <p>Hello, do you have stocks?</p>
-                                    </div>
-                                </li>
-                                <li class="row message-item">
-                                    <div class="message-item__image">
-                                        <img class="message-user__img" src="images/p2.png"> 
-                                    </div>
-                                    <div class="message-item__content">
-                                        <h4>Boluwafife Adeyemi</h4>
-                                        <p>Hello, do you have stocks?</p>
-                                    </div>
-                                </li>
-                                <li class="row message-item unread-message">
-                                    <div class="message-item__image">
-                                        <img class="message-user__img" src="images/p2.png"> 
-                                    </div>
-                                    <div class="message-item__content ">
-                                        <h4>Arinola Adeyinka</h4>
-                                        <p>Hello, do you have stocks?</p>
-                                    </div>
-                                </li>
-                                <li class="row message-item unread-message">
-                                    <div class="message-item__image">
-                                        <img class="message-user__img" src="images/p2.png"> 
-                                    </div>
-                                    <div class="message-item__content">
-                                        <h4>Adeola Tunji</h4>
-                                        <p>Hello, do you have stocks?</p>
-                                    </div>
-                                </li>
-                                <li class="row message-item active-message">
-                                    <div class="message-item__image">
-                                        <img class="message-user__img" src="images/p2.png"> 
-                                    </div>
-                                    <div class="message-item__content">
-                                        <h4>Adebanke Adeniyi</h4>
-                                        <p>Hello, do you have stocks?</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="message-content__box">
-                                <div class="message-box">
-                                    <h3 class="message-content__title">Conversation with Adebanke Adeniyi</h3>
-                                    <ul class="row">
-                                        <li class="row message-content__item left-message__content">
-                                            <div class="message-content__image">
-                                                <img class="message-user__img" src="images/p2.png">
-                                            </div>
-                                            <div class="message-content__content">
-                                                <h4 class="message-content__user">Adebanke Adeniyi</h4>
-                                                <div class="message-content__text">Hello, do you have stocks?</div>
-                                            </div>
-                                        </li>
-                                        <li class="row message-content__item right-message__content">
-                                            <div class="message-content__image">
-                                                <img class="message-user__img" src="images/p2.png">
-                                            </div>
-                                            <div class="message-content__content">
-                                                <h4 class="message-content__user">Adebanke Adeniyi</h4>
-                                                <div class="message-content__text">Hello, do you have stocks?</div>
-                                            </div>
-                                        </li>
-                                        <li class="row message-content__item right-message__content">
-                                            <div class="message-content__image">
-                                                <img class="message-user__img" src="images/p2.png">
-                                            </div>
-                                            <div class="message-content__content">
-                                                <h4 class="message-content__user">Adebanke Adeniyi</h4>
-                                                <div class="message-content__text">Hello, do you have stocks?</div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="message-text__field">
-                                    <textarea class="message-text__box"></textarea>
-                                    <button type="submit" class="btn btn-danger message-text__send">
-                                         Send
-                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- footer -->
-    <div class="footer">
-        <div class="container">
-            <div class="footer-info w3-agileits-info">
-                <div class="col-md-4 address-left agileinfo">
-                    <div class="footer-logo header-logo">
-                        <h2>
-                            <a href="index.html">
-                                <span>S</span>mart
-                                <i>Bazaar</i>
-                            </a>
-                        </h2>
-                        <h6>Your stores. Your place.</h6>
-                    </div>
-                    <ul>
-                        <li>
-                            <i class="fa fa-map-marker"></i> 123 San Sebastian, New York City USA.</li>
-                        <li>
-                            <i class="fa fa-mobile"></i> 333 222 3333 </li>
-                        <li>
-                            <i class="fa fa-phone"></i> +222 11 4444 </li>
-                        <li>
-                            <i class="fa fa-envelope-o"></i>
-                            <a href="mailto:example@mail.com"> mail@example.com</a>
-                        </li>
-                    </ul>
+            <div class="fj">
+                <div class="alert oj alert-dismissible ro sp" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <a class="oe" href="profile/index.html">Visit your profile!</a> Check your self, you aren't looking well.
                 </div>
-                <div class="col-md-8 address-right">
-                    <div class="col-md-4 footer-grids">
-                        <h3>Company</h3>
-                        <ul>
-                            <li>
-                                <a href="about.html">About Us</a>
-                            </li>
-                            <li>
-                                <a href="values.html">Core Values</a>
-                            </li>
-                            <li>
-                                <a href="privacy.html">Privacy Policy</a>
-                            </li>
-                        </ul>
+
+                <div class="mu abk ro sp">
+                    <div class="mv">
+                        <h6 class="abd">Sponsored</h6>
+                        <div data-grid="images" data-target-height="150">
+                            <img class="bkp" data-width="640" data-height="640" data-action="zoom" src="assets/img/instagram_2.jpg" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                        </div>
+                        <p>
+                            <strong>It might be time to visit Iceland.</strong> Iceland is so chill, and everything looks cool here.
+                            Also, we heard the people are pretty nice. What are you waiting for?</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                Price:
+                                <strong>NGN 600</strong>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-danger">Add to Cart</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4 footer-grids">
-                        <h3>Services</h3>
-                        <ul>
-                            <li>
-                                <a href="contact.html">Contact Us</a>
-                            </li>
-                            <li>
-                                <a href="faq.html">FAQ</a>
-                            </li>
-                            <li>
-                                <a href="sitemap.html">Site Map</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 footer-grids">
-                        <h3>Payment Methods</h3>
-                        <ul>
-                            <li>
-                                <i class="fa fa-money" aria-hidden="true"></i> Cash On Delivery</li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
+
+                <div class="mu blj">
+                    <div class="mv">
+                        © 2018 Bootstrap
+                        <a href="#">About</a>
+                        <a href="#">Help</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Privacy</a>
+                        <a href="#">Cookies</a>
+                        <a href="#">Ads </a>
+                        <a href="#">Info</a>
+                        <a href="#">Brand</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Status</a>
+                        <a href="#">Apps</a>
+                        <a href="#">Jobs</a>
+                        <a href="#">Advertise</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- //footer -->
-    <div class="copy-right">
-        <div class="container">
-            <p>© 2018 Smart bazaar . All rights reserved.</p>
-        </div>
-    </div>
-    <!-- countdown.js -->
-    <script src="js/jquery.knob.js"></script>
-    <script src="js/jquery.throttle.js"></script>
-    <script src="js/jquery.classycountdown.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#countdown1').ClassyCountdown({
-                end: '1387999325',
-                now: '1387995995',
-                labels: true,
-                style: {
-                    element: "",
-                    textResponsive: .5,
-                    days: {
-                        gauge: {
-                            thickness: .10,
-                            bgColor: "rgba(0,0,0,0)",
-                            fgColor: "#1abc9c",
-                            lineCap: 'round'
-                        },
-                        textCSS: 'font-weight:300; color:#fff;'
-                    },
-                    hours: {
-                        gauge: {
-                            thickness: .10,
-                            bgColor: "rgba(0,0,0,0)",
-                            fgColor: "#05BEF6",
-                            lineCap: 'round'
-                        },
-                        textCSS: ' font-weight:300; color:#fff;'
-                    },
-                    minutes: {
-                        gauge: {
-                            thickness: .10,
-                            bgColor: "rgba(0,0,0,0)",
-                            fgColor: "#8e44ad",
-                            lineCap: 'round'
-                        },
-                        textCSS: ' font-weight:300; color:#fff;'
-                    },
-                    seconds: {
-                        gauge: {
-                            thickness: .10,
-                            bgColor: "rgba(0,0,0,0)",
-                            fgColor: "#f39c12",
-                            lineCap: 'round'
-                        },
-                        textCSS: ' font-weight:300; color:#fff;'
-                    }
 
-                },
-                onEndCallback: function () {
-                    console.log("Time out!");
-                }
-            });
-        });
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/toolkit.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/sky_pilot.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        // execute/clear BS loaders for docs
+        $(function () { while (window.BS && window.BS.loader && window.BS.loader.length) { (window.BS.loader.pop())() } })
     </script>
-    <!-- //countdown.js -->
-    <!-- menu js aim -->
-    </script>
-    <script src="js/main.js"></script>
-    <!-- Resource jQuery -->
-    <!-- //menu js aim -->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
 </body>
 
 </html>
