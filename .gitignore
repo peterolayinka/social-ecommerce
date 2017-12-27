@@ -1,2 +1,3 @@
 doc_index.html
 inventory/*
+/__pycache__/
