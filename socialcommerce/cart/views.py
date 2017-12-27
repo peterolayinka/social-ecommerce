@@ -1,27 +1,15 @@
-from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.views import generic
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
-from store.models import Product
+from store.models import Product, Order
 from .cart import Cart
-from .forms import CartAddProductForm
+from .forms import CartAddProductForm, CartShippingDetail, UpdateOrderForm
 
 # Create your views here.
-
-# class CartAddView(generic.FormView):
-#     form_class = CartAddProductForm
-#     success_url = '/cart'
-
-#     def post(request):
-#         self.cart = Cart(self.request)
-#         self.product = get_object_or_404(Product, id=self.kwargs.get('id'))
-
-#     def form_valid(request, form):
-#         cd = form.cleaned_data
-#         self.cart.add(product=self.product,
-#                         quantity=cd['quantity'],
-#                         update=cd['update'])
 
 @require_POST
 def cart_add(request, product_id):
@@ -56,3 +44,63 @@ def cart_detail(request):
                                             initial={'quantity': item['quantity'],
                                             'update': True})
     return render(request, 'cart/detail.html', {'cart': cart})
+
+@login_required
+def cart_process(request):
+    return render(request, 'cart/process.html', {})
+
+class ProcessOrderView(generic.FormView):
+    success_url = reverse_lazy('cart:user_orders')
+    template_name = 'cart/process.html'
+    form_class = CartShippingDetail
+
+    def form_valid(self, form, **kwargs):
+        # import pdb; pdb.set_trace()
+        parent_form = super(ProcessOrderView, self).form_valid(form, **kwargs)
+        cart = Cart(self.request)
+        order = form.cleaned_data
+        for item in cart:
+            Order.objects.create(
+                product=item['product'], user=self.request.user,
+                store_id=item['store'], quantity=item['quantity'],
+                price=item['price'], address=order['address'],
+                city=order['city'], postal_code=order['postal_code'])
+        messages.success(self.request, 'Order has been successfully placed.')
+        # import pdb; pdb.set_trace()
+        cart.clear()
+        return parent_form
+
+    def form_invalid(self, form):
+        messages.success(self.request, 'Order could not be placed, An error occured.')
+
+class OrderDetailView(generic.ListView):
+    template_name = 'cart/orders.html'
+    model = Order
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        return Order.filter_order_based_on_query(self.request)
+
+    def get_context_data(self):
+        context = super(OrderDetailView, self).get_context_data()
+        context['cancelled_order_count'] = Order.get_cancelled_order_count(self.request)
+        context['awaiting_order_count'] = Order.get_awaiting_order_count(self.request)
+        context['confirmed_order_count'] = Order.get_confirmed_order_count(self.request)
+        context['total_order_count'] = Order.get_total_order_count(self.request)
+        context['delivered_order_count'] = Order.get_delivered_order_count(self.request)
+        context['processing_order_count'] = Order.get_processing_order_count(self.request)
+        return context
+
+@login_required
+def update_order(request, order_id):
+    order = Order.objects.get(pk=order_id)
+    form = UpdateOrderForm(instance=order)
+    if request.POST:
+        form = UpdateOrderForm(instance=order, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Order successfully updated")
+        else:
+            import pdb; pdb.set_trace()
+            messages.error(request, "Order update failed")
+        return redirect(reverse_lazy('cart:user_orders'))

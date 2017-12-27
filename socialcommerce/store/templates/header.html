@@ -30,7 +30,7 @@
                 <a class="mb" href="store.html">My Store</a>
             </li>
             <li class="md">
-                <a class="mb" href="orders.html">My Order</a>
+                <a class="mb" href="{% url 'cart:user_orders' %}">My Order</a>
             </li>
 
             <!-- <li class="md se">
@@ -39,6 +39,14 @@
             <!-- <li class="md se">
           <a class="mb" data-action="growl">Growl</a>
         </li> -->
+            <li class="md se">
+                <a class="g mb" href="{% url 'cart:cart_detail' %}">
+                    <i class="fa fa-2x fa-cart-arrow-down" aria-hidden="true"></i>
+                    {% if cart|length > 0 %}
+                    <span style="color:fff; font-weight: 900;">{{cart|length}}</span>
+                    {% endif %}
+                </a>
+            </li>
             <li class="md se">
                 <a class="mb" href="login/index.html">Logout</a>
             </li>
@@ -64,7 +72,7 @@
                         aria-expanded="false">
                         <img class="rl" src="{% static 'img/a6.png' %}">
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left: initial; right: 0;">
                         <li>
                             <a class="dropdown-item" href="edit_profile.html">Edit Profile</a>
                         </li>
@@ -75,13 +83,13 @@
                 </div>
             </li>
         </ul>
-        <ul class="nav navbar-nav ro" id="js-popoverContent">
+        <!-- <ul class="nav navbar-nav ro" id="js-popoverContent">
             <li class="md">
                 <a class="mb" href="#" data-action="growl">Edit Profile</a>
             </li>
             <li class="md">
                 <a class="mb" href="login/index.html">Logout</a>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </nav>

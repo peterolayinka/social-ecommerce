@@ -13,15 +13,17 @@
                             {% with product=item.product %}
                             <li class="row order-item">
                                 <div class="col-sm-3 order-image-box">
-                                    {% if product.image %}
-                                    <img src="{{product.image.url}}" class="order-image">
-                                    {% else %}
-                                    <img src="{% static 'img/no-product-image.png' %}" class="order-image">
-                                    {% endif %}
+                                    <a href="{% url 'single_product' product.slug %}">
+                                        {% if product.image %}
+                                        <img src="{{product.image.url}}" class="order-image">
+                                        {% else %}
+                                        <img src="{% static 'img/no-product-image.png' %}" class="order-image">
+                                        {% endif %}
+                                    </a>
                                 </div>
                                 <div class="col-sm-9 order-description-box">
                                     <p class="product-name">
-                                        {{product.name}}
+                                        <a href="{% url 'single_product' product.slug %}">{{product.name}}</a>
                                     </p>
                                     <div>
                                         <span>Quantity:</span>
@@ -47,37 +49,7 @@
                             {% empty %}
                                 <li>Your cart is empty.</li>
                             {% endfor %}
-                            <!-- <li class="row order-item">
-                                <div class="col-sm-3 order-image-box">
-                                    <img src="img/f8.png" class="order-image">
-                                </div>
-                                <div class="col-sm-9 order-description-box">
-                                    <p class="product-name">
-                                        Nike Shoes Casual wear.
-                                    </p>
-                                    <div>
-                                        <span>Quantity:</span>
-                                        <span class="cart-quantity">
-                                            <form>
-                                                <select name="cart_quantity">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                </select>
-                                                <input type="submit" class="btn btn-info" value="update">
-                                            </form>
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span>Price:</span>
-                                        <span class="order-price">20000 NGN</span>
-                                    </div>
-                                </div>
-                                <i class="fa fa-2x fa-times text-danger cart-delete"></i>
-                            </li> -->
+                            
                             {% if cart|length > 0 %}
                             <li class="text-right">
                                 Total:
@@ -85,7 +57,7 @@
                                 <br>
                                 <br>
                                 <div>
-                                    <a href="process.html">
+                                    <a href="{% url 'cart:cart_process' %}">
                                         <button class="btn btn-primary view-order">Checkout</button>
                                     </a>
                                 </div>

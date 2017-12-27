@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+<div class="fm">
+    <div class="main-dashboard-page">
+        <div class="dashboard-first__sec">
+            <div class="row">
+                <div class="col-md-12 order-status">
+                    <ul class="row">
+                        <li class="col-sm-2 nav-item__selected">
+                            <a href="{% url 'cart:user_orders' %}?q=all_order">
+                                <span class="order-status__count">{{total_order_count}}</span>
+                                <span class="order-status__text">All Orders</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'cart:user_orders' %}?q=awaiting_order">
+                                <span class="order-status__count">{{awaiting_order_count}}</span>
+                                <span class="order-status__text">Awaiting</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'cart:user_orders' %}?q=processing_order">
+                                <span class="order-status__count">{{processing_order_count}}</span>
+                                <span class="order-status__text">Processing</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'cart:user_orders' %}?q=cancelled_order">
+                                <span class="order-status__count">{{cancelled_order_count}}</span>
+                                <span class="order-status__text">Cancelled</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'cart:user_orders' %}?q=delivered_order">
+                                <span class="order-status__count">{{delivered_order_count}}</span>
+                                <span class="order-status__text">Delivered</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'cart:user_orders' %}?q=confirmed_order">
+                                <span class="order-status__count">{{confirmed_order_count}}</span>
+                                <span class="order-status__text">Confirmed</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-second__sec">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="order-list">
+                        {% for order in orders %}
+                        {% with product=order.product %}
+                        <li class="row order-item">
+                            <div class="col-sm-3 order-image-box">
+                                <span class="alert {% if order.status == 'confirmed' %}alert-success{% elif order.status == 'cancelled' %}alert-danger{% elif order.status == 'delivered' %}alert-secondary{% elif order.status == 'processing' %}alert-info{% elif order.status == 'awaiting' %}alert-warning{% endif %}">{{order.status}}</span>
+                                {% if product.image %}
+                                <img src="{{product.image.url}}" class="order-image"> 
+                                {% else %}
+                                <img src="{% static 'img/no-product-image.png' %}" class="order-image"> 
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-7 order-description-box">
+                                <p class="product-name">
+                                    {{product.name}}
+                                </p>
+                                <div>
+                                    <span>Quantity:</span>
+                                    <span class="order-quantity">{{order.quantity}}</span>
+                                </div>
+                                <div>
+                                    <span>Price:</span>
+                                    <span class="order-price">NGN {{order.price}}</span>
+                                </div>
+                                <div>
+                                    {% if order.status == 'cancelled' %}
+                                    <p> <strong>Cancellation Reason:</strong>
+                                        {% if order.cancellation_reason %}
+                                            {{order.cancellation_reason}}
+                                        {% else %}
+                                            No Reason was stated
+                                        {% endif %}
+                                    </p>
+                                    {% endif %}
+                                </div>
+                                <button class="btn btn-warning view-order" data-toggle="modal" data-target="#orderShippingInfo">View Order Detail</button>
+                            </div>
+                            {% if order.status != 'confirmed' %}
+                            <div class="col-sm-2 order-action-box">
+                                {% if order.status != 'cancelled' and order.status != 'delivered' %}
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#orderCancellation">Cancel</button>
+                                {% endif %}
+
+                                {% if order.status == 'delivered' %}
+                                <form method="POST" action="{% url 'cart:update_order' order.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="status" value="confirmed">
+                                    <button type="submit" class="btn btn-success">Confirm</button>
+                                </form>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            <!-- Shipping Information Modal -->
+                            <div class="modal fade" id="orderShippingInfo" tabindex="-1" role="dialog" aria-labelledby="OrderShippingInfo" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="OrderShippingInfo">Shipping Information</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                <strong>From Store:</strong> {{order.store}}</p>
+                                            <p>
+                                                <strong>Address:</strong> {{order.address}}</p>
+                                            <p>
+                                                <strong>City:</strong> {{order.city}}</p>
+                                            <p>
+                                                <strong>Postal Code:</strong> {{order.postal_code}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- //shipping information modal -->
+                            <!-- Cancel Order Modal -->
+                            <div class="modal fade" id="orderCancellation" tabindex="-1" role="dialog" aria-labelledby="OrderShippingInfo" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <form method="POST" action="{% url 'cart:update_order' order.pk %}">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="OrderShippingInfo">Shipping Information</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure to cancel this order? Please give a reason below:
+                                                <div class="form-group">
+                                                    {% csrf_token %}
+                                                    <div class="col-10">
+                                                        <input type="hidden" name='status' value="cancelled">
+                                                        <input class="form-control" type="text" name="cancellation_reason" id="cancellation-input" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Cancel Order</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- //Cancel order modal -->
+                        </li>
+                        {% endwith %}
+                        {% empty %}
+                        <li class="row order-item">
+                            <p>You currently have no order</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+    
+                </div>
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+{% endblock %}

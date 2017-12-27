@@ -211,7 +211,7 @@ a.g.mb i {
     padding: 0;
 }
 .order-status li {
-    padding: 10px;
+    padding: 10px 5px;
     display: inline-block;
     text-align: center;
     border-right: 1px solid #D1CFCF;
@@ -223,6 +223,9 @@ a.g.mb i {
     display: block;
     font-size: 18px;
     font-weight: bold;
+}
+.order-status__text {
+    font-size: 12px;
 }
 .dashboard-second__sec {
     margin-top: 20px;
@@ -278,8 +281,12 @@ a.g.mb i {
     margin-bottom: 5px;
     margin-top: 2px;
 }
-.product-item a {
+.product-item a,
+.order-item a {
     color: inherit;
+}
+.order-item__detail {
+    margin-top: 15px;
 }
 .view-order.btn {
     font-size: 12px;
@@ -316,3 +323,10 @@ a.g.mb i {
     padding-left: 5px;
 }
 /* //preference */
+/* bootstrap */
+.alert-secondary {
+    color: #464a4e;
+    background-color: #e7e8ea;
+    border-color: #dddfe2;
+}
+/* //bootstrap */

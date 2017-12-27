@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 
-from .models import Product
+from .models import Product, Order, Store
 from cart.forms import CartAddProductForm
 # Create your views here.
 
@@ -9,8 +9,8 @@ class IndexView(generic.ListView, generic.FormView):
     template_name = 'store/index.html'
     context_object_name = 'product_list'
     form_class = CartAddProductForm
-
     def get_queryset(self, **kwargs):
+        # import pdb; pdb.set_trace()
         return Product.objects.all().order_by('-created')
 
 class ProductDetailView(generic.DetailView, generic.FormView):
