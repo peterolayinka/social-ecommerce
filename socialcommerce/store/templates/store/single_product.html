@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block left_side_bar %}
+    <div class="fj">
+        <div class="mu blf abk">
+            {% if product.image %}
+            <img class="product-img" src="{{ product.image.url }}">
+            {% else %}
+            <img class="product-img" src="{% static 'img/no-product-image.png' %}">
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+    
+{% block main_content %}
+    <div class="fm">
+        <h3>{{ product.name }}</h3>
+        <p>
+            <strong>Rocessing Time:</strong> Item will be shipped out within 2-3 working days</p>
+        <hr>
+        <p>{{ product.description }} <strong>({{product.category}})</strong></p>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                Price:
+                <strong>NGN {{product.price}}</strong>
+            </div>
+            <div class="col-md-8">
+                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                    {% csrf_token %}
+                    {{form}}
+                    <button class="btn btn-danger">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

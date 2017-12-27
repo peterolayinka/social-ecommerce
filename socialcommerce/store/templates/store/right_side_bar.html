@@ -1,0 +1,52 @@
+{% load static %}
+
+<div class="fj">
+    {% for message in messages %}
+    <div class="alert oj alert-dismissible ro sp" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        {{message|safe}}
+    </div>
+    {% endfor %}
+
+    <div class="mu abk ro sp">
+        <div class="mv">
+            <h6 class="abd">Sponsored</h6>
+            <div data-grid="images" data-target-height="150">
+                <img class="bkp" data-width="640" data-height="640" data-action="zoom" src="assets/img/instagram_2.jpg" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+            </div>
+            <p>
+                <strong>It might be time to visit Iceland.</strong> Iceland is so chill, and everything looks cool here. Also, we
+                heard the people are pretty nice. What are you waiting for?</p>
+            <div class="row">
+                <div class="col-md-6">
+                    Price:
+                    <strong>NGN 600</strong>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mu blj">
+        <div class="mv">
+            © 2018 Bootstrap
+            <a href="#">About</a>
+            <a href="#">Help</a>
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">Cookies</a>
+            <a href="#">Ads </a>
+            <a href="#">Info</a>
+            <a href="#">Brand</a>
+            <a href="#">Blog</a>
+            <a href="#">Status</a>
+            <a href="#">Apps</a>
+            <a href="#">Jobs</a>
+            <a href="#">Advertise</a>
+        </div>
+    </div>
+</div>

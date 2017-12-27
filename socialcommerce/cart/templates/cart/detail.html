@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+    <div class="fm">
+        <div class="main-dashboard-page">
+            <h3>Cart</h3>
+            <div class="cart">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="order-list">
+                            {% for item in cart %}
+                            {% with product=item.product %}
+                            <li class="row order-item">
+                                <div class="col-sm-3 order-image-box">
+                                    {% if product.image %}
+                                    <img src="{{product.image.url}}" class="order-image">
+                                    {% else %}
+                                    <img src="{% static 'img/no-product-image.png' %}" class="order-image">
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-9 order-description-box">
+                                    <p class="product-name">
+                                        {{product.name}}
+                                    </p>
+                                    <div>
+                                        <span>Quantity:</span>
+                                        <span class="cart-quantity"> 
+                                            <form method="post" action="{% url 'cart:cart_add' product.id %}">
+                                                {% csrf_token %}
+                                                {{item.update_quantity_form.quantity}}
+                                                {{item.update_quantity_form.update}}
+                                                <input type="submit" class="btn btn-info" value="Update">
+                                            </form>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>Price:</span>
+                                        <span class="order-price">NGN {{item.price}}</span>
+                                    </div>
+                                </div>
+                                <a href="{% url 'cart:cart_remove' product.id %}">
+                                    <i class="fa fa-2x fa-times text-danger cart-delete"></i>
+                                </a>
+                            </li>
+                            {% endwith %}
+                            {% empty %}
+                                <li>Your cart is empty.</li>
+                            {% endfor %}
+                            <!-- <li class="row order-item">
+                                <div class="col-sm-3 order-image-box">
+                                    <img src="img/f8.png" class="order-image">
+                                </div>
+                                <div class="col-sm-9 order-description-box">
+                                    <p class="product-name">
+                                        Nike Shoes Casual wear.
+                                    </p>
+                                    <div>
+                                        <span>Quantity:</span>
+                                        <span class="cart-quantity">
+                                            <form>
+                                                <select name="cart_quantity">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                </select>
+                                                <input type="submit" class="btn btn-info" value="update">
+                                            </form>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>Price:</span>
+                                        <span class="order-price">20000 NGN</span>
+                                    </div>
+                                </div>
+                                <i class="fa fa-2x fa-times text-danger cart-delete"></i>
+                            </li> -->
+                            {% if cart|length > 0 %}
+                            <li class="text-right">
+                                Total:
+                                <strong>NGN {{cart.get_total_price}}</strong>
+                                <br>
+                                <br>
+                                <div>
+                                    <a href="process.html">
+                                        <button class="btn btn-primary view-order">Checkout</button>
+                                    </a>
+                                </div>
+                            </li>
+                            {% endif %}
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
