@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+<div class="bkn" style="background-image: url({% static 'img/bg2.jpg' %});">
+    <div class="by">
+        <div class="bko">
+            {% if user.profile.image %}
+                <img class="rl bkp" src="{{request.user.profile.image.url}}">
+            {% else %}
+                <img class="rl bkp" src="{% static 'img/no-profile-image.png' %}">
+            {% endif %}
+            <h3 class="bkr">{{request.user.get_full_name}}</h3>
+            <p class="bkq">
+                 {{request.user.profile.about|truncatechars:200}}
+            </p>
+        </div>
+    </div>
+
+    <nav class="bks">
+        <ul class="nav mc tv">
+            <!-- <li class="md">
+                <a class="mb active" href="#">Product</a>
+            </li> -->
+            <li class="md">
+                <a class="mb" style="padding-bottom: 0" href="#">
+                    <button class="btn btn-primary">
+                        Chat
+                    </button>
+                </a>
+                <br>
+                <br>
+            </li>
+            <!-- <li class="md">
+          <a class="mb" href="#">Anothers</a>
+        </li> -->
+        </ul>
+    </nav>
+</div>
+<!-- 
+<div class="container">
+    <div class="row by abn">
+        <div class="col-md-3">
+            <img src="img/p1.png">
+            <div>
+                Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac
+                consectetur ac, vestibulum at eros.
+                <strong>(Smart Phone)</strong>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    Price:
+                    <strong>NGN 600</strong>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <img src="img/p2.png">
+            <div>
+                Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac
+                consectetur ac, vestibulum at eros.
+                <strong>(Smart Phone)</strong>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    Price:
+                    <strong>NGN 600</strong>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <img src="img/p3.png">
+            <div>
+                Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac
+                consectetur ac, vestibulum at eros.
+                <strong>(Smart Phone)</strong>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    Price:
+                    <strong>NGN 600</strong>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <img src="img/p4.png">
+            <div>
+                Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac
+                consectetur ac, vestibulum at eros.
+                <strong>(Smart Phone)</strong>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    Price:
+                    <strong>NGN 600</strong>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-danger">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+{% endblock %}

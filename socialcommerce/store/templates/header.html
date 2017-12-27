@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li class="md">
-                <a class="mb" href="profile.html">Profile</a>
+                <a class="mb" href="{% url 'account:profile_detail' request.user.username %}">Profile</a>
             </li>
             <li class="md">
                 <a class="mb" href="message.html">Messages</a>
@@ -32,13 +32,6 @@
             <li class="md">
                 <a class="mb" href="{% url 'cart:user_orders' %}">My Order</a>
             </li>
-
-            <!-- <li class="md se">
-          <a class="mb" href="notifications/index.html">Notifications</a>
-        </li> -->
-            <!-- <li class="md se">
-          <a class="mb" data-action="growl">Growl</a>
-        </li> -->
             <li class="md se">
                 <a class="g mb" href="{% url 'cart:cart_detail' %}">
                     <i class="fa fa-2x fa-cart-arrow-down" aria-hidden="true"></i>
@@ -70,7 +63,11 @@
                 <div class="dropdown">
                     <button class="cg bll blm bkf dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <img class="rl" src="{% static 'img/a6.png' %}">
+                        {% if user.profile.image %}
+                            <img class="rl" src="{{request.user.profile.image.url}}">
+                        {% else %}
+                            <img class="rl" src="{% static 'img/no-profile-image.png' %}">
+                        {% endif %}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left: initial; right: 0;">
                         <li>

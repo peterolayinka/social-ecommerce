@@ -4,15 +4,19 @@
     <div class="mu blf abk">
         <div class="na" style="background-image: url({% static 'img/bg.png' %});"></div>
         <div class="mv arx">
-            <a href="profile/index.html">
-                <img class="blg" src="{% static 'img/a6.png' %}">
+            <a class="mb" href="{% url 'account:profile_detail' request.user.username %}">
+                {% if user.profile.image %}
+                    <img class="blg" src="{{request.user.profile.image.url}}">
+                {% else %}
+                    <img class="blg" src="{% static 'img/no-profile-image.png' %}">
+                {% endif %}
             </a>
 
             <h6 class="mw">
-                <a class="bjx" href="profile/index.html">Dave Gamache</a>
+                <a class="mb" href="{% url 'account:profile_detail' request.user.username %}">{{request.user.get_full_name}}</a>
             </h6>
 
-            <p class="abk">I wish i was a little bit taller, wish i was a baller, wish i had a girl…&nbsp;also.</p>
+            <p class="abk">{{request.user.profile.about|truncatechars:200}}</p>
         </div>
     </div>
 </div>

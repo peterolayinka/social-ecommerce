@@ -49,6 +49,7 @@
 
     {% include 'header.html' %}
 
+    {% block page_content %}
     <div class="by acy adh">
         <div class="dp">
             {% block left_side_bar %}
@@ -64,6 +65,7 @@
             {% endblock %}
         </div>
     </div>
+    {% endblock %}
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/application.js' %}"></script>
