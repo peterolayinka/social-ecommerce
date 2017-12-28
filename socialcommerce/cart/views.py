@@ -79,28 +79,34 @@ class OrderDetailView(generic.ListView):
     context_object_name = 'orders'
 
     def get_queryset(self):
-        return Order.filter_order_based_on_query(self.request)
+        return Order.filter_order_based_on_query(self.request, user=self.request.user)
 
     def get_context_data(self):
         context = super(OrderDetailView, self).get_context_data()
-        context['cancelled_order_count'] = Order.get_cancelled_order_count(self.request)
-        context['awaiting_order_count'] = Order.get_awaiting_order_count(self.request)
-        context['confirmed_order_count'] = Order.get_confirmed_order_count(self.request)
-        context['total_order_count'] = Order.get_total_order_count(self.request)
-        context['delivered_order_count'] = Order.get_delivered_order_count(self.request)
-        context['processing_order_count'] = Order.get_processing_order_count(self.request)
+        context['cancelled_order_count'] = Order.get_cancelled_order_count(self.request, user=self.request.user)
+        context['awaiting_order_count'] = Order.get_awaiting_order_count(self.request, user=self.request.user)
+        context['confirmed_order_count'] = Order.get_confirmed_order_count(self.request, user=self.request.user)
+        context['total_order_count'] = Order.get_total_order_count(self.request, user=self.request.user)
+        context['delivered_order_count'] = Order.get_delivered_order_count(self.request, user=self.request.user)
+        context['processing_order_count'] = Order.get_processing_order_count(self.request, user=self.request.user)
         return context
 
 @login_required
 def update_order(request, order_id):
     order = Order.objects.get(pk=order_id)
     form = UpdateOrderForm(instance=order)
+    store =None
     if request.POST:
         form = UpdateOrderForm(instance=order, data=request.POST)
         if form.is_valid():
+            cd = form.cleaned_data
+            store = cd['store']
             form.save()
             messages.success(request, "Order successfully updated")
         else:
-            import pdb; pdb.set_trace()
             messages.error(request, "Order update failed")
-        return redirect(reverse_lazy('cart:user_orders'))
+
+        if store =='True':
+            return redirect(reverse_lazy('store:store_orders'))
+        else:
+            return redirect(reverse_lazy('cart:user_orders'))

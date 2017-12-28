@@ -13,7 +13,7 @@
                             {% with product=item.product %}
                             <li class="row order-item">
                                 <div class="col-sm-3 order-image-box">
-                                    <a href="{% url 'single_product' product.slug %}">
+                                    <a href="{% url 'store:single_product' product.slug %}">
                                         {% if product.image %}
                                         <img src="{{product.image.url}}" class="order-image">
                                         {% else %}
@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col-sm-9 order-description-box">
                                     <p class="product-name">
-                                        <a href="{% url 'single_product' product.slug %}">{{product.name}}</a>
+                                        <a href="{% url 'store:single_product' product.slug %}">{{product.name}}</a>
                                     </p>
                                     <div>
                                         <span>Quantity:</span>

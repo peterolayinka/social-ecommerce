@@ -15,6 +15,7 @@
 
     <div class="collapse f" id="navbarResponsive">
         <ul class="navbar-nav adn">
+            {% if request.user.is_authenticated %}
             <li class="md active">
                 <a class="mb" href="/">Home
                     <span class="zt">(current)</span>
@@ -27,11 +28,12 @@
                 <a class="mb" href="message.html">Messages</a>
             </li>
             <li class="md">
-                <a class="mb" href="store.html">My Store</a>
+                <a class="mb" href="{% url 'store:store_orders' %}">My Store</a>
             </li>
             <li class="md">
                 <a class="mb" href="{% url 'cart:user_orders' %}">My Order</a>
             </li>
+             {% endif %}
             <li class="md se">
                 <a class="g mb" href="{% url 'cart:cart_detail' %}">
                     <i class="fa fa-2x fa-cart-arrow-down" aria-hidden="true"></i>
@@ -40,16 +42,19 @@
                     {% endif %}
                 </a>
             </li>
+            {% if request.user.is_authenticated %}
+            <li class="md se">
+                <a class="mb" href="{% url 'account:edit_profile' request.user.username %}">Edit Profile</a>
+            </li>
             <li class="md se">
                 <a class="mb" href="login/index.html">Logout</a>
             </li>
-
+            {% endif %}
         </ul>
 
         <form class="kl zc ro sk">
             <input class="form-control" data-action="grow" placeholder="Search" type="text">
         </form>
-
         <ul id="#js-popoverContent" class="nav navbar-nav zc aah ro sk">
             <li class="md">
                 <a class="g mb" href="{% url 'cart:cart_detail' %}">
@@ -59,6 +64,7 @@
                     {% endif %}
                 </a>
             </li>
+            {% if request.user.is_authenticated %}
             <li class="md aax">
                 <div class="dropdown">
                     <button class="cg bll blm bkf dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -71,14 +77,22 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left: initial; right: 0;">
                         <li>
-                            <a class="dropdown-item" href="edit_profile.html">Edit Profile</a>
+                            <a class="dropdown-item" href="{% url 'account:edit_profile' request.user.username %}">Edit Profile</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="edit_profile.html">Logout</a>
+                            <a class="dropdown-item" href="#">Logout</a>
                         </li>
                     </ul>
                 </div>
             </li>
+            {% else %}
+            <li>
+                <div>
+                    <button class="btn btn-primary">Login </button> <span style="color: #fff;">Or</span>
+                    <button class="btn btn-info">Sign Up</button>
+                </div>
+            </li>
+            {% endif %}
         </ul>
         <!-- <ul class="nav navbar-nav ro" id="js-popoverContent">
             <li class="md">

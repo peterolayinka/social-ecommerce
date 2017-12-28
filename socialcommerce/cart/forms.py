@@ -19,7 +19,7 @@ class CartShippingDetail(forms.Form):
     # city = forms.CharField
 
 class UpdateOrderForm(forms.ModelForm):
-    # status = forms.CharField(max_length=255)
+    store = forms.CharField(max_length=255, required=False)
     # cancellation_reason = forms.CharField(max_length=255)
     class Meta:
         model = Order

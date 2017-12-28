@@ -14,18 +14,25 @@
         <div class="mv">
             <h6 class="abd">Sponsored</h6>
             <div data-grid="images" data-target-height="150">
-                <img class="bkp" data-width="640" data-height="640" data-action="zoom" src="{% static 'img/a4.png' %}" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                {% if sponsored_product.image %}
+                <img class="bkp" src="{{ sponsored_product.image.url }}" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                {% else %}
+                <img class="bkp" src="{% static 'img/no-product-image.png' %}" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                {% endif %}
             </div>
             <p>
-                <strong>It might be time to visit Iceland.</strong> Iceland is so chill, and everything looks cool here. Also, we
-                heard the people are pretty nice. What are you waiting for?</p>
+                <strong>{{ sponsored_product.name }}:</strong> {{sponsored_product.description|truncatechars:100}}</p>
             <div class="row">
                 <div class="col-md-6">
                     Price:
-                    <strong>NGN 600</strong>
+                    <strong>NGN {{sponsored_product.price}}</strong>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn btn-danger">Add to Cart</button>
+                    <form action="{% url 'cart:cart_add' sponsored_product.id %}" method="post">
+                        {% csrf_token %}
+                        {{cart_quantity_form}}
+                        <button class="btn btn-danger">Add to Cart</button>
+                    </form>
                 </div>
             </div>
         </div>

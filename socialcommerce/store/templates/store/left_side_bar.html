@@ -2,6 +2,7 @@
 
 <div class="fj">
     <div class="mu blf abk">
+        {% if request.user.is_authenticated %}
         <div class="na" style="background-image: url({% static 'img/bg.png' %});"></div>
         <div class="mv arx">
             <a class="mb" href="{% url 'account:profile_detail' request.user.username %}">
@@ -18,5 +19,10 @@
 
             <p class="abk">{{request.user.profile.about|truncatechars:200}}</p>
         </div>
+        {% else %}
+        <div>
+            <button class="btn btn-primary">Login </button> <br> Or <br><button class="btn btn-info">Sign Up</button> Now!
+        </div>
+        {% endif %}
     </div>
 </div>

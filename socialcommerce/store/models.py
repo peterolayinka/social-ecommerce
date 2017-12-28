@@ -12,6 +12,8 @@ class Store(models.Model):
     description = models.TextField()
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -26,6 +28,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+class AvailableProductManager(models.Manager):
+    def get_queryset(self):
+        return super(AvailableProductManager, self).get_queryset().\
+                    filter(available=True)
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
@@ -36,10 +43,13 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     processing_time = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    stock = models.PositiveIntegerField()
-    available = models.BooleanField()
+    stock = models.PositiveIntegerField(default=60)
+    available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    objects = models.Manager()
+    available_products = AvailableProductManager()
 
     class Meta:
         index_together = (('id', 'slug'),)
@@ -81,63 +91,63 @@ class Order(models.Model):
 
 
     @classmethod
-    def get_total_order_count(cls, request):
-        return Order.objects.filter(user=request.user).count()
+    def get_total_order_count(cls, request, **kwargs):
+        return Order.objects.filter(**kwargs).count()
 
     @classmethod
-    def get_awaiting_order_count(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.AWAITING).count()
+    def get_awaiting_order_count(cls, request, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.AWAITING).count()
 
     @classmethod
-    def get_confirmed_order_count(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.CONFIRMED).count()
+    def get_confirmed_order_count(cls, request, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.CONFIRMED).count()
 
     @classmethod
-    def get_cancelled_order_count(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.CANCELLED).count()
+    def get_cancelled_order_count(cls, request, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.CANCELLED).count()
 
     @classmethod
-    def get_delivered_order_count(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.DELIVERED).count()
+    def get_delivered_order_count(cls, request, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.DELIVERED).count()
     
     @classmethod
-    def get_processing_order_count(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.PROCESSING).count()
+    def get_processing_order_count(cls, request, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.PROCESSING).count()
 
     @classmethod
-    def get_awaiting_order(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.AWAITING)
+    def get_awaiting_order(cls, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.AWAITING)
 
     @classmethod
-    def get_confirmed_order(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.CONFIRMED)
+    def get_confirmed_order(cls, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.CONFIRMED)
 
     @classmethod
-    def get_cancelled_order(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.CANCELLED)
+    def get_cancelled_order(cls, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.CANCELLED)
 
     @classmethod
-    def get_delivered_order(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.DELIVERED)
+    def get_delivered_order(cls, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.DELIVERED)
     
     @classmethod
-    def get_processing_order(cls, request):
-        return Order.objects.filter(user=request.user, status=cls.PROCESSING)
+    def get_processing_order(cls, **kwargs):
+        return Order.objects.filter(**kwargs, status=cls.PROCESSING)
 
-    def filter_order_based_on_query(cls):
-        query = cls.GET.get('q')
+    def filter_order_based_on_query(request, **kwargs):
+        query = request.GET.get('q')
         # import pdb; pdb.set_trace()
         if query == 'confirmed_order':
-            queryset = Order.get_confirmed_order(cls)
+            queryset = Order.get_confirmed_order(**kwargs)
         elif query == 'cancelled_order':
-            queryset = Order.get_cancelled_order(cls)
+            queryset = Order.get_cancelled_order(**kwargs)
         elif query == 'delivered_order':
-            queryset = Order.get_delivered_order(cls)
+            queryset = Order.get_delivered_order(**kwargs)
         elif query == 'processing_order':
-            queryset = Order.get_processing_order(cls)
+            queryset = Order.get_processing_order(**kwargs)
         elif query == 'awaiting_order':
-            queryset = Order.get_awaiting_order(cls)
+            queryset = Order.get_awaiting_order(**kwargs)
         else:
-            queryset = Order.objects.filter(user=cls.user)
+            queryset = Order.objects.filter(**kwargs)
 
         return queryset
