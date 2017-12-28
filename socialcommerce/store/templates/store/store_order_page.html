@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block left_side_bar %}
+    {% include 'store/store_left_menu.html' %}
+{% endblock %}
+
+{% block main_content %}
+<div class="fm">
+    <div class="main-dashboard-page">
+        {% if store %}
+        <div class="dashboard-first__sec">
+            <div class="row">
+                <div class="col-sm-2">
+                    {% if store.image %}
+                        <img class="rl" src="{{store.image.url}}">
+                    {% else %}
+                        <img class="rl" src="{% static 'img/no-store-image.png' %}">
+                    {% endif %}
+                </div>
+                <div class="col-sm-10">
+                    <h2 class="store-title">{{store.name}}</h2>
+                    <p class="store-description">
+                        {{ store.description }}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 order-status">
+                    <ul class="row">
+                        <li class="col-sm-2 nav-item__selected">
+                            <a href="{% url 'store:store_orders' %}?q=all_order">
+                                <span class="order-status__count">{{total_order_count}}</span>
+                                <span class="order-status__text">All Orders</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'store:store_orders' %}?q=awaiting_order">
+                                <span class="order-status__count">{{awaiting_order_count}}</span>
+                                <span class="order-status__text">Awaiting</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'store:store_orders' %}?q=processing_order">
+                                <span class="order-status__count">{{processing_order_count}}</span>
+                                <span class="order-status__text">Processing</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'store:store_orders' %}?q=cancelled_order">
+                                <span class="order-status__count">{{cancelled_order_count}}</span>
+                                <span class="order-status__text">Cancelled</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'store:store_orders' %}?q=delivered_order">
+                                <span class="order-status__count">{{delivered_order_count}}</span>
+                                <span class="order-status__text">Delivered</span>
+                            </a>
+                        </li>
+                        <li class="col-sm-2">
+                            <a href="{% url 'store:store_orders' %}?q=confirmed_order">
+                                <span class="order-status__count">{{confirmed_order_count}}</span>
+                                <span class="order-status__text">Confirmed</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-second__sec">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="order-list">
+                        {% for order in orders %}
+                        {% with product=order.product %}
+                        <li class="row order-item">
+                            <div class="col-sm-3 order-image-box">
+                                <span class="alert {% if order.status == 'confirmed' %}alert-success{% elif order.status == 'cancelled' %}alert-danger{% elif order.status == 'delivered' %}alert-secondary{% elif order.status == 'processing' %}alert-info{% elif order.status == 'awaiting' %}alert-warning{% endif %}">{{order.status}}</span>
+                                {% if product.image %}
+                                <img src="{{product.image.url}}" class="order-image"> 
+                                {% else %}
+                                <img src="{% static 'img/no-product-image.png' %}" class="order-image"> 
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-7 order-description-box">
+                                <p class="product-name">
+                                    {{product.name}}
+                                </p>
+                                <div>
+                                    <span>Quantity:</span>
+                                    <span class="order-quantity">{{order.quantity}}</span>
+                                </div>
+                                <div>
+                                    <span>Price:</span>
+                                    <span class="order-price">NGN {{order.price}}</span>
+                                </div>
+                                <div>
+                                    {% if order.status == 'cancelled' %}
+                                    <p> <strong>Cancellation Reason:</strong>
+                                        {% if order.cancellation_reason %}
+                                            {{order.cancellation_reason}}
+                                        {% else %}
+                                            No Reason was stated
+                                        {% endif %}
+                                    </p>
+                                    {% endif %}
+                                </div>
+                                <button class="btn btn-warning view-order" data-toggle="modal" data-target="#orderShippingInfo">View Order Detail</button>
+                            </div>
+                            {% if order.status != 'confirmed' %}
+                            <div class="col-sm-2 order-action-box">
+                                {% if order.status == 'awaiting' %}
+                                <form method="POST" action="{% url 'cart:update_order' order.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name='store' value="True">
+                                    <input type="hidden" name="status" value="processing">
+                                    <button type="submit" class="btn btn-info">Process</button>
+                                </form>
+                                {% endif %}
+
+                                {% if order.status == 'processing' %}
+                                <form method="POST" action="{% url 'cart:update_order' order.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name='store' value="True">
+                                    <input type="hidden" name="status" value="delivered">
+                                    <button type="submit" class="btn btn-success">Delivered</button>
+                                </form>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            <!-- Shipping Information Modal -->
+                            <div class="modal fade" id="orderShippingInfo" tabindex="-1" role="dialog" aria-labelledby="OrderShippingInfo" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="OrderShippingInfo">Shipping Information</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                <strong>From Store:</strong> {{order.store}}</p>
+                                            <p>
+                                                <strong>Address:</strong> {{order.address}}</p>
+                                            <p>
+                                                <strong>City:</strong> {{order.city}}</p>
+                                            <p>
+                                                <strong>Postal Code:</strong> {{order.postal_code}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- //shipping information modal -->
+                        </li>
+                        {% endwith %}
+                        {% empty %}
+                        <li class="order-item">
+                            <p>You currently have no order</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+    
+                </div>
+            </div>
+    
+        </div>
+        {% else %}
+            <p>
+                You currently dont have a store. Create one now! <button class="btn btn-primary" data-toggle="modal" data-target="#createStore">Create Store!</button>
+            </p>
+            <!-- Create Store Modal -->
+            <div class="modal fade" id="createStore" tabindex="-1" role="dialog" aria-labelledby="createStore" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form method="POST" action="{% url 'store:create_store' %}" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="OrderShippingInfo">Create Store</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="name" class="col-2 col-form-label">Name</label>
+                                        <div class="col-10">
+                                            {% if store_form.name.errors %}
+                                                {{store_form.name.errors}}
+                                            {% endif %}
+                                            <input class="form-control" type="text" name="name" id="name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-2 col-form-label">Description</label>
+                                        <div class="col-10">
+                                            {% if store_form.description.errors %}
+                                                {{store_form.description.errors}}
+                                            {% endif %}
+                                            <textarea class="form-control" name="description" id="description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image" class="col-2 col-form-label">Image</label>
+                                        <div class="col-10">
+                                            {% if store_form.image.errors %}
+                                                {{store_form.image.errors}}
+                                            {% endif %}
+                                            <input type="file" name="image" id="image">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address" class="col-2 col-form-label">Address</label>
+                                        <div class="col-10">
+                                            {% if store_form.address.errors %}
+                                                {{store_form.address.errors}}
+                                            {% endif %}
+                                            <input class="form-control" type="text" name="address" id="address">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city" class="col-2 col-form-label">City</label>
+                                        <div class="col-10">
+                                            {% if store_form.city.errors %}
+                                                {{store_form.city.errors}}
+                                            {% endif %}
+                                            <input class="form-control" type="text" name="city" id="city">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Create Store</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- //Create store modal -->
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

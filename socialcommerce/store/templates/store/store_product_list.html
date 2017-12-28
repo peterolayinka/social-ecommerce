@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block left_side_bar %}
+    {% include 'store/store_left_menu.html' %}
+{% endblock %}
+
+{% block main_content %}
+    {% include 'store/product_list.html' %}
+{% endblock %}

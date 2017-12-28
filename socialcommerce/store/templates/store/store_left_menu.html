@@ -1,0 +1,22 @@
+<div class="fj">
+    <div class="ca abk">
+        {% if request.user.store_owned %}
+        <a href="{% url 'store:store_orders' %}" class="b os ru tw">
+            <span>Orders</span>
+            <span class="h aub"></span>
+        </a>
+        <a href="{% url 'store:add_product' %}" class="b os ru tw">
+            <span>Add Product</span>
+            <span class="h aub"></span>
+        </a>
+        <a href="{% url 'store:view_products' %}" class="b os ru tw">
+            <span>View Products</span>
+            <span class="h aub"></span>
+        </a>
+        <a href="{% url 'store:edit_store' %}" class="b os ru tw">
+            <span>Edit Store</span>
+            <span class="h aub"></span>
+        </a>
+        {% endif %}
+    </div>
+</div>

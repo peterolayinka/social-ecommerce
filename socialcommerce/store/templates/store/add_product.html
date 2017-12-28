@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block left_side_bar %}
+    {% include 'store/store_left_menu.html' %}
+{% endblock %}
+
+{% block main_content %}
+<div class="fm">
+    <div class="main-dashboard-page">
+        <div class="form-group">
+            <form method="POST" action="{% if product %}{% url 'store:edit_product' product.slug %}{% else %}{% url 'store:add_product' %}{% endif %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name" class="col-2 col-form-label">Name</label>
+                <div class="col-10">
+                    {% if product_form.name.errors %}
+                        {{product_form.name.errors}}
+                    {% endif %}
+                    <input class="form-control" value="{% if product_form.name.value %}{{product_form.name.value}}{% endif%}" type="text" name="name" id="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-2 col-form-label">Description</label>
+                <div class="col-10">
+                    {% if product_form.description.errors %}
+                        {{product_form.description.errors}}
+                    {% endif %}
+                    <textarea class="form-control" name="description" id="description">{% if product_form.description.value %}{{product_form.description.value}}{% endif %}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="category" class="col-2 col-form-label">Category</label>
+                <div class="col-10">
+                    {% if product_form.category.errors %}
+                        {{product_form.category.errors}}
+                    {% endif %}
+                    <select name="category" id="category">
+                        {% for category in categories %}
+                        <option value="{{category.slug}}" {% if product.category.slug == category.slug %}selected{% endif %}>{{category.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="image" class="col-2 col-form-label">Image</label>
+                <div class="col-10">
+                    {% if product_form.image.errors %}
+                        {{product_form.image.errors}}
+                    {% endif %}
+                    <input type="file" name="image" id="image">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="processing_time" class="col-2 col-form-label">Processing Time</label>
+                <div class="col-10">
+                    {% if product_form.processing_time.errors %}
+                        {{product_form.processing_time.errors}}
+                    {% endif %}
+                    <input class="form-control" type="text" value="{% if product_form.processing_time.value %}{{product_form.processing_time.value}}{% endif %}" placeholder="Item will be shipped out within 2-3 working days" name="processing_time" id="processing_time">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price" class="col-2 col-form-label">Price</label>
+                <div class="col-10">
+                    {% if product_form.price.errors %}
+                        {{product_form.price.errors}}
+                    {% endif %}
+                    <input class="form-control" type="text" value="{% if product_form.name.value %}{{product_form.price.value}}{% endif %}" name="price" id="price">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-10">
+                <label for="available" class="col-2 col-form-label">Available</label>
+                    {% if product_form.available.errors %}
+                        {{product_form.available.errors}}
+                    {% endif %}
+                    <input type="checkbox" name="available" {% if product_form.available.value == True %}checked{% endif %} id="available">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
