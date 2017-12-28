@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+    <div class="by acy adh">
+        <div class="dp">
+            {% block left_side_bar %}{% endblock %}
+
+            {% block main_content %}
+                <div class="main-dashboard-page__col">
+                
+                    <div class="col-sm-12 col-md-12 ">
+                        <h3 class="message title">Messages</h3>
+                        <div class="main-dashboard-page">
+                            <div class="row message-box__container">
+                                <div class="col-md-4">
+                                    <ul class="message-list">
+                                        <li class="row message-item unread-message">
+                                            <div class="message-item__image">
+                                                <img class="message-user__img" src="images/p2.png">
+                                            </div>
+                                            <div class="message-item__content">
+                                                <h4>Peter Olayinka</h4>
+                                                <p>Hello, do you have stocks?</p>
+                                            </div>
+                                        </li>
+                                        <li class="row message-item">
+                                            <div class="message-item__image">
+                                                <img class="message-user__img" src="images/p2.png">
+                                            </div>
+                                            <div class="message-item__content">
+                                                <h4>Tolani Ayaoba</h4>
+                                                <p>Hello, do you have stocks?</p>
+                                            </div>
+                                        </li>
+                                        <li class="row message-item">
+                                            <div class="message-item__image">
+                                                <img class="message-user__img" src="images/p2.png">
+                                            </div>
+                                            <div class="message-item__content">
+                                                <h4>Boluwafife Adeyemi</h4>
+                                                <p>Hello, do you have stocks?</p>
+                                            </div>
+                                        </li>
+                                        <li class="row message-item unread-message">
+                                            <div class="message-item__image">
+                                                <img class="message-user__img" src="images/p2.png">
+                                            </div>
+                                            <div class="message-item__content ">
+                                                <h4>Arinola Adeyinka</h4>
+                                                <p>Hello, do you have stocks?</p>
+                                            </div>
+                                        </li>
+                                        <li class="row message-item unread-message">
+                                            <div class="message-item__image">
+                                                <img class="message-user__img" src="images/p2.png">
+                                            </div>
+                                            <div class="message-item__content">
+                                                <h4>Adeola Tunji</h4>
+                                                <p>Hello, do you have stocks?</p>
+                                            </div>
+                                        </li>
+                                        <li class="row message-item active-message">
+                                            <div class="message-item__image">
+                                                <img class="message-user__img" src="images/p2.png">
+                                            </div>
+                                            <div class="message-item__content">
+                                                <h4>Adebanke Adeniyi</h4>
+                                                <p>Hello, do you have stocks?</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="message-content__box">
+                                        <div class="message-box">
+                                            <h3 class="message-content__title">Conversation with Adebanke Adeniyi</h3>
+                                            <ul class="row">
+                                                <li class="row message-content__item left-message__content">
+                                                    <div class="message-content__image">
+                                                        <img class="message-user__img" src="images/p2.png">
+                                                    </div>
+                                                    <div class="message-content__content">
+                                                        <h4 class="message-content__user">Adebanke Adeniyi</h4>
+                                                        <div class="message-content__text">Hello, do you have stocks?</div>
+                                                    </div>
+                                                </li>
+                                                <li class="row message-content__item right-message__content">
+                                                    <div class="message-content__image">
+                                                        <img class="message-user__img" src="images/p2.png">
+                                                    </div>
+                                                    <div class="message-content__content">
+                                                        <h4 class="message-content__user">Adebanke Adeniyi</h4>
+                                                        <div class="message-content__text">Hello, do you have stocks?</div>
+                                                    </div>
+                                                </li>
+                                                <li class="row message-content__item right-message__content">
+                                                    <div class="message-content__image">
+                                                        <img class="message-user__img" src="images/p2.png">
+                                                    </div>
+                                                    <div class="message-content__content">
+                                                        <h4 class="message-content__user">Adebanke Adeniyi</h4>
+                                                        <div class="message-content__text">Hello, do you have stocks?</div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="message-text__field">
+                                            <textarea class="message-text__box"></textarea>
+                                            <button type="submit" class="btn btn-danger message-text__send">
+                                                Send
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block right_side_bar %}
+                 {% include 'store/right_side_bar.html' %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -25,7 +25,7 @@
                 <a class="mb" href="{% url 'account:profile_detail' request.user.username %}">Profile</a>
             </li>
             <li class="md">
-                <a class="mb" href="message.html">Messages</a>
+                <a class="mb" href="{% url 'message:message_list' %}">Messages</a>
             </li>
             <li class="md">
                 <a class="mb" href="{% url 'store:store_orders' %}">My Store</a>
