@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block left_side_bar %}
+    {% include 'store/store_left_menu.html' %}
+{% endblock %}
+
+{% block main_content %}
+
+<div class="fm">
+    <div class="main-dashboard-page">
+        <div class="mu main-dashboard-page">
+            <div class="row message-box__container">
+                <div class="col-md-4">
+                    <ul class="message-list">
+                        {% for message_list in message_lists %}
+                            {% with store=message_list.store user=message_list.user_from.profile %}
+                        <li class="row message-item {% if message_list.store_read == False %}unread-message{% endif %}">
+                            <a href="{% url 'store:single_message' message_list.user_from.id message_list.id %}">
+                                <div class="message-item__image">
+                                    
+                                        {% if user.image %}
+                                            <img class="message-user__img store-message__user-img" src="{{ user.image.url }}">
+                                        {% else %}
+                                            <img class="message-user__img store-message__user-img" src="{% static 'img/no-store-image.png' %}">
+                                        {% endif %}
+                                    
+                                </div>
+                                <div class="message-item__content store-message__item">
+                                    <h4>{{message_list.user_from.get_full_name}}</h4>
+                                    <p>{{message_list.message_list.last.content|truncatechars:30}}</p>
+                                </div>
+                            </a>
+                        </li>
+                            {% endwith %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    <div class="message-content__box">
+                        <div class="message-box">
+                            {% if message_items %}
+                            <h3 class="message-content__title" style="font-size:13px">Conversation with {{receipient.get_full_name}}</h3>
+                            <ul class="message-container row">
+                                {% for message in message_items %}
+                                <li class="row message-content__item {% if message.from_store %}left-message__content{% else %}right-message__content{% endif %}">
+                                    <div class="message-content__image">
+                                        {% if message.from_store %}
+                                            {% if message.store.image %}
+                                                <img class="message-user__img" src="{{ message.store.image.url }}">
+                                            {% else %}
+                                                <img class="message-user__img" src="{% static 'img/no-store-image.png' %}">
+                                            {% endif %}
+                                        {% else %}
+                                            {% with user=message.user_from.profile %}
+                                                {% if user.image %}
+                                                    <img class="message-user__img" src="{{ user.image.url }}">
+                                                {% else %}
+                                                    <img class="message-user__img" src="{% static 'img/no-profile-image.png' %}">
+                                                {% endif %}
+                                            {% endwith %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="message-content__content">
+                                        <h4 class="message-content__user">{% if message.from_store %}{{message.store.name}}{% else %}{{ receipient.get_full_name}}{% endif %}</h4>
+                                        <div class="message-content__text">{{message.content}}</div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                                <h3 class="message-content__title">Welcome to your message box</h3>
+                            {% endif %}
+                        </div>
+                        {% if message_items %}
+                        <div class="message-text__field">
+                            <textarea class="message-text__box"></textarea>
+                            <button type="submit" class="jsSendMessage btn btn-danger message-text__send" data-url="{% url 'store:store_send_message' message_list_id %}" data-url-get="{% url 'store:store_get_message' message_list_id %}" data-store-id="{{ message_items.first.store.id }}" data-user-id={{receipient.id}}>
+                                Send
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
