@@ -68,6 +68,8 @@
     {% endblock %}
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/jquery_csrf_token.js' %}"></script>
     <script src="{% static 'js/application.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     
@@ -76,7 +78,7 @@
     <script src="{% static 'js/chart.js' %}"></script>
     <script src="{% static 'js/sky_pilot.js' %}"></script>
     {% endblock %}
-
+    <script src="{% static 'js/script.js' %}"></script>
     <script>
         // execute/clear BS loaders for docs
         $(function () { while (window.BS && window.BS.loader && window.BS.loader.length) { (window.BS.loader.pop())() } })

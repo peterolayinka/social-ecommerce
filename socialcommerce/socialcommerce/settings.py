@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'account',
     'message',
     'cart',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

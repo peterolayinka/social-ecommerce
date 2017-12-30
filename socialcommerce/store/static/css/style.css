@@ -16,7 +16,7 @@ a.g.mb i {
 /* message */
 .message-box__container {
     height: 450px;
-    border: 1px solid #D1CFCF;
+    /* border: 1px solid #D1CFCF; */
     margin: 0;
     position: relative;
     overflow: hidden;
@@ -63,16 +63,28 @@ a.g.mb i {
 .message-item__image {
     padding-right: 10px;
 }
-.message-item__content,
+.message-item__content {
+    width: calc(100% - 60px);
+    padding-top: 5px;
+}
+.store-message__item {
+    width: calc(100% - 40px);
+}
 .message-content__content {
-    /* width: calc(100% - 60px); */
     padding-top: 5px;
 }
 .message-item__content h4 {
     font-size: 14px;
 }
+.store-message__item h4 {
+    font-size: 12px;
+}
 .message-item__content p {
     font-size: 12px;
+}
+.store-message__item p {
+    margin-bottom: 0;
+    font-size: 11px;
 }
 .message-content__box {
     height: 450px;
@@ -82,6 +94,13 @@ a.g.mb i {
 }
 .message-box {
     height: 340px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.message-container {
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0;
 }
 .message-text__box {
     resize: none;
@@ -105,6 +124,10 @@ a.g.mb i {
 .message-user__img {
     width: 50px;
     height: 50px;
+}
+.store-message__user-img {
+    width: 30px;
+    height: 30px;
 }
 .message-content__image .message-user__img {
     width: 30px;

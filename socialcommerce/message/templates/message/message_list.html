@@ -11,106 +11,77 @@
                 
                     <div class="col-sm-12 col-md-12 ">
                         <h3 class="message title">Messages</h3>
-                        <div class="main-dashboard-page">
+                        <div class="mu main-dashboard-page">
                             <div class="row message-box__container">
                                 <div class="col-md-4">
                                     <ul class="message-list">
-                                        <li class="row message-item unread-message">
-                                            <div class="message-item__image">
-                                                <img class="message-user__img" src="images/p2.png">
-                                            </div>
-                                            <div class="message-item__content">
-                                                <h4>Peter Olayinka</h4>
-                                                <p>Hello, do you have stocks?</p>
-                                            </div>
+                                        {% for message_list in message_lists %}
+                                         {% with store=message_list.store %}
+                                        <li class="row message-item {% if message_list.user_from_read == False %}unread-message{% endif %}">
+                                            <a href="{% url 'message:single_message' store.id message_list.id %}">
+                                                <div class="message-item__image">
+                                                    
+                                                        {% if store.image %}
+                                                            <img class="message-user__img" src="{{ store.image.url }}">
+                                                        {% else %}
+                                                            <img class="message-user__img" src="{% static 'img/no-store-image.png' %}">
+                                                        {% endif %}
+                                                    
+                                                </div>
+                                                <div class="message-item__content">
+                                                    <h4>{{message_list.store.name}}</h4>
+                                                    <p>{{message_list.message_list.last.content|truncatechars:30}}</p>
+                                                </div>
+                                            </a>
                                         </li>
-                                        <li class="row message-item">
-                                            <div class="message-item__image">
-                                                <img class="message-user__img" src="images/p2.png">
-                                            </div>
-                                            <div class="message-item__content">
-                                                <h4>Tolani Ayaoba</h4>
-                                                <p>Hello, do you have stocks?</p>
-                                            </div>
-                                        </li>
-                                        <li class="row message-item">
-                                            <div class="message-item__image">
-                                                <img class="message-user__img" src="images/p2.png">
-                                            </div>
-                                            <div class="message-item__content">
-                                                <h4>Boluwafife Adeyemi</h4>
-                                                <p>Hello, do you have stocks?</p>
-                                            </div>
-                                        </li>
-                                        <li class="row message-item unread-message">
-                                            <div class="message-item__image">
-                                                <img class="message-user__img" src="images/p2.png">
-                                            </div>
-                                            <div class="message-item__content ">
-                                                <h4>Arinola Adeyinka</h4>
-                                                <p>Hello, do you have stocks?</p>
-                                            </div>
-                                        </li>
-                                        <li class="row message-item unread-message">
-                                            <div class="message-item__image">
-                                                <img class="message-user__img" src="images/p2.png">
-                                            </div>
-                                            <div class="message-item__content">
-                                                <h4>Adeola Tunji</h4>
-                                                <p>Hello, do you have stocks?</p>
-                                            </div>
-                                        </li>
-                                        <li class="row message-item active-message">
-                                            <div class="message-item__image">
-                                                <img class="message-user__img" src="images/p2.png">
-                                            </div>
-                                            <div class="message-item__content">
-                                                <h4>Adebanke Adeniyi</h4>
-                                                <p>Hello, do you have stocks?</p>
-                                            </div>
-                                        </li>
+                                         {% endwith %}
+                                        {% endfor %}
                                     </ul>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="message-content__box">
                                         <div class="message-box">
-                                            <h3 class="message-content__title">Conversation with Adebanke Adeniyi</h3>
-                                            <ul class="row">
-                                                <li class="row message-content__item left-message__content">
+                                            {% if receipient %}
+                                            <h3 class="message-content__title">Conversation with {{receipient.name}}</h3>
+                                            <ul class="message-container row">
+                                                {% for message in message_items %}
+                                                <li class="row message-content__item {% if request.user == message.user_from %}left-message__content{% else %}right-message__content{% endif %}">
                                                     <div class="message-content__image">
-                                                        <img class="message-user__img" src="images/p2.png">
+                                                        {% if request.user == message.user_from %}
+                                                            {% with user=message.user_from.profile %}
+                                                            {% if user.image %}
+                                                                <img class="message-user__img" src="{{ user.image.url }}">
+                                                            {% else %}
+                                                                <img class="message-user__img" src="{% static 'img/no-profile-image.png' %}">
+                                                            {% endif %}
+                                                            {% endwith %}
+                                                        {% else %}
+                                                            {% if message.store.image %}
+                                                                <img class="message-user__img" src="{{ message.store.image.url }}">
+                                                            {% else %}
+                                                                <img class="message-user__img" src="{% static 'img/no-store-image.png' %}">
+                                                            {% endif %}
+                                                        {% endif %}
                                                     </div>
                                                     <div class="message-content__content">
-                                                        <h4 class="message-content__user">Adebanke Adeniyi</h4>
-                                                        <div class="message-content__text">Hello, do you have stocks?</div>
+                                                        <h4 class="message-content__user">{% if request.user == message.user_from %}{{request.user.get_full_name}}{% else %}{{ receipient.name }}{% endif %}</h4>
+                                                        <div class="message-content__text">{{message.content}}</div>
                                                     </div>
                                                 </li>
-                                                <li class="row message-content__item right-message__content">
-                                                    <div class="message-content__image">
-                                                        <img class="message-user__img" src="images/p2.png">
-                                                    </div>
-                                                    <div class="message-content__content">
-                                                        <h4 class="message-content__user">Adebanke Adeniyi</h4>
-                                                        <div class="message-content__text">Hello, do you have stocks?</div>
-                                                    </div>
-                                                </li>
-                                                <li class="row message-content__item right-message__content">
-                                                    <div class="message-content__image">
-                                                        <img class="message-user__img" src="images/p2.png">
-                                                    </div>
-                                                    <div class="message-content__content">
-                                                        <h4 class="message-content__user">Adebanke Adeniyi</h4>
-                                                        <div class="message-content__text">Hello, do you have stocks?</div>
-                                                    </div>
-                                                </li>
+                                                {% endfor %}
                                             </ul>
+                                            {% else %}
+                                                <h3 class="message-content__title">Welcome to your message box</h3>
+                                            {% endif %}
                                         </div>
+                                        {% if receipient %}
                                         <div class="message-text__field">
                                             <textarea class="message-text__box"></textarea>
-                                            <button type="submit" class="btn btn-danger message-text__send">
+                                            <button type="submit" class="jsSendMessage btn btn-danger message-text__send" data-url="{% url 'message:send_message' receipient.id %}" data-url-get="{% url 'message:get_message' receipient.id %}" data-store-id="{{ receipient.id }}">
                                                 Send
                                             </button>
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

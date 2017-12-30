@@ -21,6 +21,16 @@
         <hr>
         <p>{{ product.description }} <strong>({{product.category}})</strong></p>
         <br>
+        <div class="bku">
+            {% if product.store.image %}
+                <img class="bkp ru uk abc" src="{{ product.store.image.url }}">
+            {% else %}
+                <img class="bkp ru uk abc" src="{% static 'img/no-product-image.png' %}">
+            {% endif %}
+            Store: <strong>{{product.store.name}}</strong> <a href="{% url 'message:start_chat' product.store.id %}"><button class="btn btn-primary">Chat</button></a>
+        </div>
+        <br>
+        <br>
         <div class="row">
             <div class="col-md-4">
                 Price:

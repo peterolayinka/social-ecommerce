@@ -5,7 +5,11 @@
     <ul class="ca bkt bku abk">
         {% for product in product_list %}
         <li class="oq b acx product-item">
-            <img class="bkp ru uk abc" src="{{ product.store.image.url }}">
+            {% if product.store.image %}
+                <img class="bkp ru uk abc" src="{{ product.store.image.url }}">
+            {% else %}
+                <img class="bkp ru uk abc" src="{% static 'img/no-store-image.png' %}">
+            {% endif %}
             <div class="or">
                 <div class="bky">
                     <small class="zc asz">{{product.created|timesince}}</small>

@@ -20,8 +20,8 @@
             <p class="abk">{{request.user.profile.about|truncatechars:200}}</p>
         </div>
         {% else %}
-        <div>
-            <button class="btn btn-primary">Login </button> <br> Or <br><button class="btn btn-info">Sign Up</button> Now!
+        <div style="padding: 10px;text-align: center;">
+            <button class="btn btn-block btn-primary">Login </button>  Or <button class="btn btn-block btn-info">Sign Up Now!</button>
         </div>
         {% endif %}
     </div>

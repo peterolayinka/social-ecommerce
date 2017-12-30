@@ -119,24 +119,5 @@ def view_products(request):
     product_list = Product.objects.filter(store=request.user.store_owned).order_by('-created')
     return render(request, 'store/store_product_list.html', {'product_list': product_list})
 
-def edit_store(request):
-    store
-
-class EditStoreView():
-    pass
-
-class AddStoreProductView():
-    pass
-
-class EditStoreProductView():
-    pass
-
-class ListStoreProductView():
-    pass
-
-class DeleteStoreProductView():
-    pass
-
-
 class SearchView():
     pass
