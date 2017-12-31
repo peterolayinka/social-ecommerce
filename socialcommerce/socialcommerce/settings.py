@@ -27,7 +27,7 @@ SECRET_KEY = '*3(84b^3yv%dk%pvhiio$crlc+1v7rda7x=y(%7*_^6gm+cjxd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'bmas.pythonanywhere.com']
 
 
 # Application definition
