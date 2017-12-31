@@ -14,14 +14,19 @@
         <div class="mv">
             <h6 class="abd">Sponsored</h6>
             <div data-grid="images" data-target-height="150">
-                {% if sponsored_product.image %}
-                <img class="bkp" src="{{ sponsored_product.image.url }}" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
-                {% else %}
-                <img class="bkp" src="{% static 'img/no-product-image.png' %}" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
-                {% endif %}
+                <a href="{% url 'store:single_product' sponsored_product.slug %}">
+                    {% if sponsored_product.image %}
+                    <img class="bkp" src="{{ sponsored_product.image.url }}" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                    {% else %}
+                    <img class="bkp" src="{% static 'img/no-product-image.png' %}" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                    {% endif %}
+                </a>
             </div>
             <p>
-                <strong>{{ sponsored_product.name }}:</strong> {{sponsored_product.description|truncatechars:100}}</p>
+                <a href="{% url 'store:single_product' sponsored_product.slug %}">
+                    <strong>{{ sponsored_product.name }}:</strong> {{sponsored_product.description|truncatechars:100}}
+                </a>
+            </p>
             <div class="row">
                 <div class="col-md-6">
                     Price:

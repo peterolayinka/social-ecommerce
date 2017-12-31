@@ -1,0 +1,258 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <title>
+
+        Home · Application theme · Official Bootstrap Themes
+
+    </title>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/toolkit.css" type="text/css" rel="stylesheet">
+
+    <link href="css/application.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* note: this is a hack for ios iframe for bootstrap themes shopify page */
+
+        /* this chunk of css is not part of the toolkit :) */
+
+        body {
+            width: 1px;
+            min-width: 100%;
+            *width: 100%;
+        }
+    </style>
+
+</head>
+
+
+<body class="bjy">
+
+    <div class="bkk" id="app-growl"></div>
+
+    <nav class="header ck mo zq mt qh app-navbar">
+
+        <a class="e" href="index.html">
+            <img src="img/brand-white.png" alt="brand">
+        </a>
+
+        <button class="mk blk se" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="ml"></span>
+        </button>
+
+        <div class="collapse f" id="navbarResponsive">
+            <ul class="navbar-nav adn">
+                <li class="md active">
+                    <a class="mb" href="index.html">Home
+                        <span class="zt">(current)</span>
+                    </a>
+                </li>
+                <li class="md">
+                    <a class="mb" href="profile.html">Profile</a>
+                </li>
+                <li class="md">
+                    <a class="mb" href="message.html">Messages</a>
+                </li>
+                <li class="md">
+                    <a class="mb" href="store.html">My Store</a>
+                </li>
+                <li class="md">
+                    <a class="mb" href="orders.html">My Order</a>
+                </li>
+
+                <!-- <li class="md se">
+          <a class="mb" href="notifications/index.html">Notifications</a>
+        </li> -->
+                <!-- <li class="md se">
+          <a class="mb" data-action="growl">Growl</a>
+        </li> -->
+                <li class="md se">
+                    <a class="mb" href="login/index.html">Logout</a>
+                </li>
+
+            </ul>
+
+            <form class="kl zc ro sk">
+                <input class="form-control" data-action="grow" placeholder="Search" type="text">
+            </form>
+
+            <ul id="#js-popoverContent" class="nav navbar-nav zc aah ro sk">
+                <li class="md">
+                    <a class="g mb" href="cart.html">
+                        <i class="fa fa-2x fa-cart-arrow-down" aria-hidden="true"></i>
+                        <span>2</span>
+                    </a>
+                </li>
+                <li class="md aax">
+                    <div class="dropdown">
+                        <button class="cg bll blm bkf dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <img class="rl" src="img/a6.png">
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li>
+                                <a class="dropdown-item" href="edit_profile.html">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="edit_profile.html">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ro" id="js-popoverContent">
+                <li class="md">
+                    <a class="mb" href="#" data-action="growl">Edit Profile</a>
+                </li>
+                <li class="md">
+                    <a class="mb" href="login/index.html">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="by acy adh">
+        <div class="dp">
+            <div class="fj">
+                <div class="ca abk">
+                    <a href="add_product.html" class="b os ru tw">
+                        <span>Add Product</span>
+                        <span class="h aub"></span>
+                    </a>
+                    <a href="list_product.html" class="b os ru tw">
+                        <span>View Products</span>
+                        <span class="h aub"></span>
+                    </a>
+                    <a href="edit_store.html" class="b os ru tw">
+                        <span>Edit Store</span>
+                        <span class="h aub"></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="fm">
+                <div class="main-dashboard-page">
+                    <h3>Edit Store</h3>
+                    <div>
+                        <form class="shipping-detail__form">
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-2 col-form-label">Store Name</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-2 col-form-label">Description</label>
+                                <div class="col-10">
+                                    <textarea rows="" cols="" class="form-control">
+
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Store Image</label>
+                                <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                                <small id="fileHelp" class="form-text text-muted">This is your store profile image.</small>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-2 col-form-label">Address</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-2 col-form-label">City</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-6">
+                                <button class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="fj">
+                <div class="alert oj alert-dismissible ro sp" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <a class="oe" href="profile/index.html">Visit your profile!</a> Check your self, you aren't looking well.
+                </div>
+
+                <div class="mu abk ro sp">
+                    <div class="mv">
+                        <h6 class="abd">Sponsored</h6>
+                        <div data-grid="img" data-target-height="150">
+                            <img class="bkp" data-width="640" data-height="640" data-action="zoom" src="assets/img/instagram_2.jpg" style="width: 240px; height: 225px; margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                        </div>
+                        <p>
+                            <strong>It might be time to visit Iceland.</strong> Iceland is so chill, and everything looks cool here.
+                            Also, we heard the people are pretty nice. What are you waiting for?</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                Price:
+                                <strong>NGN 600</strong>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-danger">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mu blj">
+                    <div class="mv">
+                        © 2018 Bootstrap
+                        <a href="#">About</a>
+                        <a href="#">Help</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Privacy</a>
+                        <a href="#">Cookies</a>
+                        <a href="#">Ads </a>
+                        <a href="#">Info</a>
+                        <a href="#">Brand</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Status</a>
+                        <a href="#">Apps</a>
+                        <a href="#">Jobs</a>
+                        <a href="#">Advertise</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/toolkit.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/sky_pilot.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        // execute/clear BS loaders for docs
+        $(function () { while (window.BS && window.BS.loader && window.BS.loader.length) { (window.BS.loader.pop())() } })
+    </script>
+</body>
+
+</html>

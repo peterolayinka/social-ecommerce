@@ -47,13 +47,13 @@
                 <a class="mb" href="{% url 'account:edit_profile' request.user.username %}">Edit Profile</a>
             </li>
             <li class="md se">
-                <a class="mb" href="login/index.html">Logout</a>
+                <a class="mb" href="{% url 'account:logout' %}">Logout</a>
             </li>
             {% endif %}
         </ul>
 
-        <form class="kl zc ro sk">
-            <input class="form-control" data-action="grow" placeholder="Search" type="text">
+        <form class="kl zc ro sk" method="GET" action="{% url 'search' %}">
+            <input class="form-control" data-action="grow" name="q" placeholder="Search" type="text">
         </form>
         <ul id="#js-popoverContent" class="nav navbar-nav zc aah ro sk">
             <li class="md">
@@ -80,7 +80,7 @@
                             <a class="dropdown-item" href="{% url 'account:edit_profile' request.user.username %}">Edit Profile</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="{% url 'account:logout' %}">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -88,8 +88,13 @@
             {% else %}
             <li>
                 <div>
-                    <button class="btn btn-primary">Login </button> <span style="color: #fff;">Or</span>
-                    <button class="btn btn-info">Sign Up</button>
+                    <a href="{% url 'account:login' %}">
+                        <button class="btn btn-primary">Login </button> 
+                    </a>
+                    <span style="color: #fff;">Or</span>
+                    <a href="{% url 'account:signup' %}">
+                        <button class="btn btn-info">Sign Up</button>
+                    </a>
                 </div>
             </li>
             {% endif %}

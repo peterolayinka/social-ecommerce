@@ -4,62 +4,7 @@
 
     <ul class="ca bkt bku abk">
         {% for product in product_list %}
-        <li class="oq b acx product-item">
-            {% if product.store.image %}
-                <img class="bkp ru uk abc" src="{{ product.store.image.url }}">
-            {% else %}
-                <img class="bkp ru uk abc" src="{% static 'img/no-store-image.png' %}">
-            {% endif %}
-            <div class="or">
-                <div class="bky">
-                    <small class="zc asz">{{product.created|timesince}}</small>
-                    <h6>{{ product.store.name }} ({{ product.store.city}})</h6>
-                </div>
-                <h3 class="product-name">
-                    <a href="{% url 'store:single_product' product.slug %}">{{product.name}}</a>
-                </h3>
-                
-                <p>
-                    <a href="{% url 'store:single_product' product.slug %}">
-                    {{product.description|truncatechars:200}} <strong>({{product.category}})</strong>
-                    </a>
-                </p>
-
-                <div class="bkv" data-grid="images">
-                    <div style="display: inline-block; margin-bottom: 10px; margin-right: 10px; vertical-align: bottom;">
-                        <a href="{% url 'store:single_product' product.slug %}">
-                            {% if product.image %}
-                            <img src="{{ product.image.url }}">
-                            {% else %}
-                            <img class="product-img" src="{% static 'img/no-product-image.png' %}">
-                            {% endif %}
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        Price:
-                        <strong>NGN {{ product.price }}</strong>
-                    </div>
-                    <div class="col-md-8">
-                        {% if request.user.store_owned != product.store %}
-                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                            {% csrf_token %}
-                            {{form}}
-                            <button class="btn btn-danger">Add to Cart</button>
-                        </form>
-                        {% else %}
-                            <a href="{% url 'store:delete_product' product.slug %}">
-                            <button class="btn btn-danger" >Delete</button>
-                            </a>
-                            <a href="{% url 'store:edit_product' product.slug %}">
-                            <button class="btn btn-info">Edit</button>
-                            </a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </li>
+            {% include 'store/product_item_template.html' %}
         {% endfor %}
     </ul>
 </div>

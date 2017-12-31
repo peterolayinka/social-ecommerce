@@ -1,0 +1,136 @@
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <title>
+
+        {% block title %} Social Ecommerce {% endblock %}
+
+    </title>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/toolkit.css' %}" type="text/css" rel="stylesheet">
+
+    <link href="{% static 'css/application.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    {% block style %}{% endblock %}
+
+    <style>
+        /* note: this is a hack for ios iframe for bootstrap themes shopify page */
+
+        /* this chunk of css is not part of the toolkit :) */
+
+        body {
+            width: 1px;
+            min-width: 100%;
+            *width: 100%;
+        }
+    </style>
+
+</head>
+
+
+<body class="bjy">
+
+    {% block header %}{% endblock %}
+
+    {% block page_content %}
+        <div class="do atw">
+            <div class="aty">
+                <form role="form" method="POST" action="{% url 'account:signup' %}" class="adq arx j">
+        
+                    <a href="/" class="l abr">
+                        <img src="{% static 'img/brand.png' %}" alt="Brand">
+                    </a>
+        
+                    <div class="jt">
+                        {% if user_form.first_name.errors %}
+                            {{user_form.first_name.errors}}
+                        {% endif %}
+                        <input class="form-control" value="{% if user_form.first_name.value %}{{user_form.first_name.value}}{% endif %}" name="first_name" placeholder="First Name">
+                    </div>
+
+                    <div class="jt">
+                        {% if user_form.last_name.errors %}
+                            {{user_form.last_name.errors}}
+                        {% endif %}
+                        <input class="form-control" value="{% if user_form.last_name.value %}{{user_form.last_name.value}}{% endif %}" name="last_name" placeholder="Last Name">
+                    </div>
+
+                    <div class="jt">
+                        {% if user_form.email.errors %}
+                            {{user_form.email.errors}}
+                        {% endif %}
+                        <input class="form-control" value="{% if user_form.email.value %}{{user_form.email.value}}{% endif %}" name="email" placeholder="Email" type="email">
+                    </div>
+
+                    <div class="jt">
+                        {% if user_form.username.errors %}
+                            {{user_form.username.errors}}
+                        {% endif %}
+                        <input class="form-control" value="{% if user_form.username.value %}{{user_form.username.value}}{% endif %}" name="username" placeholder="Username">
+                    </div>
+        
+                    <div class="jt abd">
+                        <input class="form-control" name="password" placeholder="Password" type="password">
+                    </div>
+
+                    <div class="jt abd">
+                        {% if user_form.password2.errors %}
+                            {{user_form.password2.errors}}
+                        {% endif %}
+                        <input class="form-control" name="password2" placeholder="Confirm Password" type="password">
+                    </div>
+                    <input type="hidden" name="next" value="{{ next }}">
+
+                    {% csrf_token %}
+
+                    <div class="abr">
+                        <a href="{% url 'account:login' %}">
+                            <button type="button" class="cg kr">Log In</button>
+                        </a>
+                        <button type="submit" class="cg kt">Sign up</button>
+                    </div>
+        
+                    <footer class="bmx">
+                        Enjoy your visit here!
+                    </footer>
+                </form>
+            </div>
+        </div>
+    {% endblock %}
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/jquery_csrf_token.js' %}"></script>
+    <script src="{% static 'js/application.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+    {% block script %}
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/chart.js' %}"></script>
+    <script src="{% static 'js/sky_pilot.js' %}"></script>
+    {% endblock %}
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+        // execute/clear BS loaders for docs
+        $(function () { while (window.BS && window.BS.loader && window.BS.loader.length) { (window.BS.loader.pop())() } })
+    </script>
+</body>
+
+</html>

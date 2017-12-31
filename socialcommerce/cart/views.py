@@ -4,6 +4,7 @@ from django.views.decorators.http import require_POST
 from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from store.models import Product, Order
 from .cart import Cart
@@ -49,7 +50,7 @@ def cart_detail(request):
 def cart_process(request):
     return render(request, 'cart/process.html', {})
 
-class ProcessOrderView(generic.FormView):
+class ProcessOrderView(LoginRequiredMixin, generic.FormView):
     success_url = reverse_lazy('cart:user_orders')
     template_name = 'cart/process.html'
     form_class = CartShippingDetail
@@ -72,6 +73,7 @@ class ProcessOrderView(generic.FormView):
 
     def form_invalid(self, form):
         messages.success(self.request, 'Order could not be placed, An error occured.')
+
 
 class OrderDetailView(generic.ListView):
     template_name = 'cart/orders.html'

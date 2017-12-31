@@ -16,12 +16,19 @@
             <h6 class="mw">
                 <a class="mb" href="{% url 'account:profile_detail' request.user.username %}">{{request.user.get_full_name}}</a>
             </h6>
-
-            <p class="abk">{{request.user.profile.about|truncatechars:200}}</p>
+            {% if request.user.profile.about %}
+                <p class="abk">{{request.user.profile.about|truncatechars:200}}</p>
+            {% endif %}
         </div>
         {% else %}
         <div style="padding: 10px;text-align: center;">
-            <button class="btn btn-block btn-primary">Login </button>  Or <button class="btn btn-block btn-info">Sign Up Now!</button>
+            <a href="{% url 'account:login' %}">
+                <button class="btn btn-block btn-primary">Login </button>  
+            </a>
+            <span>Or</span> 
+            <a href="{% url 'account:signup' %}">
+                <button class="btn btn-block btn-info">Sign Up Now!</button>
+            </a>
         </div>
         {% endif %}
     </div>

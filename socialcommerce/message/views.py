@@ -2,6 +2,7 @@ from django.utils import timezone
 
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import JsonResponse
 
@@ -13,6 +14,7 @@ from .models import Message, MessageList
 
 User = get_user_model()
 
+@login_required
 def message_list(request):
     if 'store' in request.path:
         message_lists = MessageList.objects.filter(
@@ -22,6 +24,7 @@ def message_list(request):
         Q(user_from=request.user) | Q(user_to=request.user))
     return render(request, 'message/message_list.html', {'message_lists':message_lists})
 
+@login_required
 def single_message(request, receipient_id, message_list=None):
     if 'store' in request.path:
         receipient = get_object_or_404(User, pk=receipient_id)
@@ -83,6 +86,7 @@ def single_message(request, receipient_id, message_list=None):
                                                         'message_list_id': message_list,
                                                          'message_items': message_items})
 
+@login_required
 def get_message(request, receipient_id=None, message_list_id=None):
     sender = None
     if 'store' in request.path:
@@ -108,6 +112,7 @@ def get_message(request, receipient_id=None, message_list_id=None):
     return JsonResponse({'status': True, 'messages': serializer.data, 
                             'sender': str(sender)}, safe=True)
 
+@login_required
 def send_message(request, receipient_id=None, message_list_id=None):
     data = request.POST
     # import pdb; pdb.set_trace()

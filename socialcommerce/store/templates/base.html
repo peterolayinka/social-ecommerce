@@ -47,7 +47,9 @@
 
 <body class="bjy">
 
-    {% include 'header.html' %}
+    {% block header %}
+        {% include 'header.html' %}
+    {% endblock %}
 
     {% block page_content %}
     <div class="by acy adh">

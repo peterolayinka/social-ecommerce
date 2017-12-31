@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
-from django.contrib.auth import get_user_model
+from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model, authenticate, login
 from django.contrib import messages
 
-from .forms import UserForm, ProfileForm
+from .forms import UserForm, ProfileForm, UserRegistrationForm
 from .models import Profile
 
 User = get_user_model()
@@ -35,3 +36,18 @@ def edit_profile(request, username):
 
     return render(request, 'account/edit_profile.html', {'user_form': user_form, 
                                                         'profile_form': profile_form})
+
+def signup(request):
+    user_form = UserRegistrationForm()
+    if request.POST:
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            cd = user_form.cleaned_data
+            user = user_form.save(commit=False)
+            user.set_password(cd['password'])
+            user.save()
+            user_auth = authenticate(username=cd['username'], password=cd['password'])
+            login(request, user_auth)
+            return redirect(reverse_lazy('index'))
+
+    return render(request, 'registration/signup.html', {'user_form': user_form})

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,16 +33,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'store',
+    'account',
+    'message',
+    'cart',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store',
-    'account',
-    'message',
-    'cart',
     'rest_framework'
 ]
 
@@ -134,3 +136,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # cart session key
 
 CART_SESSION_ID = 'cart'
+
+LOGIN_URL = reverse_lazy('account:login')
+LOGIN_REDIRECT_URL = reverse_lazy('index')
+LOGOUT_URL = reverse_lazy('account:logout')

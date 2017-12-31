@@ -24,6 +24,7 @@ from store import views
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
+    path('search/', views.search_store, name="search"),
     path('admin/', admin.site.urls),
     path('message/', include('message.urls')),
     path('account/', include('account.urls')),

@@ -109,15 +109,17 @@ def add_product(request, product_slug=None):
                                                     'categories': categories,
                                                     'product': product})
 
+@login_required
 def delete_product(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
     product.delete()
     messages.success(request, 'Product was successfully deleted')
     return redirect(reverse('store:view_products'))
 
+@login_required
 def view_products(request):
     product_list = Product.objects.filter(store=request.user.store_owned).order_by('-created')
     return render(request, 'store/store_product_list.html', {'product_list': product_list})
 
-class SearchView():
-    pass
+def search_store(request):
+    return render(request, 'store/search.html', {})

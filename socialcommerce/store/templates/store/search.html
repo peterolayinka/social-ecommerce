@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+<div class="fm">
+
+    <ul class="ca bkt bku abk">
+        <li class="oq b acx product-item">
+            <form method="GET" action="">
+                <div class="btn-group" role="group">  
+                    <button id="searchCategory" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Category
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="searchCategory" >
+                        <a class="dropdown-item" href="#">
+                            Bag
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            Shoe
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            Toy
+                        </a>
+                    </div>
+                </div>
+                <input placeholder="search">
+            </form>
+        </li>
+        {% for product in product_list %}
+            {% include 'store/product_item_template.html' %}
+        {% empty %}
+            <li class="oq b acx product-item">
+                No product found, try again later!
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
