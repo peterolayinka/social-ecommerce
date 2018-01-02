@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'rest_framework',
-    'taggit'
+    'mapwidgets',
+    # 'floppyforms',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +91,7 @@ DATABASES = {
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'ecommerce',
         'USER': 'postgres',
         'HOST': 'localhost',
@@ -149,3 +152,14 @@ CART_SESSION_ID = 'cart'
 LOGIN_URL = reverse_lazy('account:login')
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGOUT_URL = reverse_lazy('account:logout')
+GOOGLE_MAP_API_KEY = ' AIzaSyAxsrulrQnEC1gRuZnOm1V1vROrIyOcx08'
+
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocationName", "london"),
+        # ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'contry': 'uk'}}),
+        ("markerFitZoom", 12),
+    ),
+    "GOOGLE_MAP_API_KEY": "AIzaSyAxsrulrQnEC1gRuZnOm1V1vROrIyOcx08",
+}
