@@ -5,17 +5,33 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages 
 
 from cart.forms import CartAddProductForm
+from account.forms import InterestForm
 from .models import Product, Order, Store, Category
 from .forms import StoreForm, ProductForm
+
 # Create your views here.
 
-class IndexView(generic.ListView, generic.FormView):
-    template_name = 'store/index.html'
-    context_object_name = 'product_list'
-    form_class = CartAddProductForm
-    def get_queryset(self, **kwargs):
-        # import pdb; pdb.set_trace()
-        return Product.available_products.all().order_by('-created')
+def index(request):
+    # form = 
+    if request.user.is_authenticated:
+        if request.POST:
+            interest = InterestForm(data=request.POST)
+            if interest.is_valid():
+                preferences = request.POST.getlist('preference')
+                for obj in preferences:
+                    request.user.profile.interests.add(obj)
+                    request.user.profile.save()
+                # interest.save()
+        user_interest = request.user.profile.interests.values_list('id', flat=True)
+        product_list = Product.available_products.get_interest_product(
+            user_interest).order_by('-created')
+    else:
+        product_list = Product.available_products.all()
+    context = {
+        'product_list': product_list,
+        'categories': Category.objects.all()
+    }
+    return render(request, 'store/index.html', context)
 
 class ProductDetailView(generic.DetailView, generic.FormView):
     template_name = 'store/single_product.html'
@@ -120,6 +136,23 @@ def delete_product(request, product_slug):
 def view_products(request):
     product_list = Product.objects.filter(store=request.user.store_owned).order_by('-created')
     return render(request, 'store/store_product_list.html', {'product_list': product_list})
+
+class SearchView(generic.ListView):
+    template_name = 'store/search.html'
+    context_object_name = 'product_list'
+
+    def get_queryset(self):
+        self.query_data = self.request.GET
+        # import pdb; pdb.set_trace()
+        return Product.available_products.filter_products(query=self.query_data)
+
+    def get_context_data(self):
+        context = super(SearchView, self).get_context_data()
+        context['q'] = self.query_data.get('q')
+        context['c'] = self.query_data.get('c')
+        context['l'] = self.query_data.get('l')
+        context['categories'] = Category.objects.all()
+        return context
 
 def search_store(request):
     return render(request, 'store/search.html', {})

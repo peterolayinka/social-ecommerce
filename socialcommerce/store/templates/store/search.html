@@ -6,25 +6,35 @@
 
     <ul class="ca bkt bku abk">
         <li class="oq b acx product-item">
-            <form method="GET" action="">
-                <div class="btn-group" role="group">  
-                    <button id="searchCategory" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Category
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="searchCategory" >
-                        <a class="dropdown-item" href="#">
-                            Bag
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            Shoe
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            Toy
-                        </a>
+            <!-- <h4>Filter</h4> -->
+            <!-- <br> -->
+            <div>
+                <form class="form-inline" method="GET" action=".">
+                    <input type="hidden" name="q" value="{{q}}">
+                    <div class="form-group">
+                        <label class="sr-only" for="categorySearch">Category</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">Category</div>
+                            <select name="c" class="form-control" id="categorySearch">
+                                <option value="all">All</option>
+                                {% for category in categories %}
+                                    <option value="{{category.slug}}" {% if c == category.slug %}selected{% endif %}>{{category.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <input placeholder="search">
-            </form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Sort by:</div>
+                            <select name="l" class="form-control" id="locationSearch">
+                                <option value="latest" {% if l == 'lastest' %}selected{% endif %}>Latest Product</option>
+                                <option value="nearby_store" {% if l == 'nearby_store' %}selected{% endif %}>Store Nearby</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sort!</button>
+                </form>
+            </div>  
         </li>
         {% for product in product_list %}
             {% include 'store/product_item_template.html' %}

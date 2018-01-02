@@ -23,8 +23,8 @@ from store import views
 # from store import
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('search/', views.search_store, name="search"),
+    path('', views.index, name='index'),
+    path('search/', views.SearchView.as_view(), name="search"),
     path('admin/', admin.site.urls),
     path('message/', include('message.urls')),
     path('account/', include('account.urls')),

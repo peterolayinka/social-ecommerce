@@ -11,6 +11,9 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email']
 
+class InterestForm(forms.Form):
+    interests = forms.CharField(widget=forms.CheckboxInput)
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile

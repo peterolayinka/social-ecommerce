@@ -28,11 +28,42 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+class AvailableProductQuerySet(models.QuerySet):
+
+    def available(self):
+        return self.filter(available=True)
+
+    def get_interest_product(self, user_interest):
+        return self.filter(category_id__in=user_interest)
+
+    def filter_products(self, **kwargs):
+        q = kwargs['query'].get('q')
+        ql = kwargs['query'].get('l')
+        qc = kwargs['query'].get('c')
+
+        data = self.filter(models.Q(name__icontains=q) | models.Q(description__icontains=q))
+
+        if qc != 'all':
+            return data.filter(category__slug=qc)
+        if ql == 'nearby_store':
+            return data
+        else:
+            return data
+
     
 class AvailableProductManager(models.Manager):
     def get_queryset(self):
-        return super(AvailableProductManager, self).get_queryset().\
-                    filter(available=True)
+        return AvailableProductQuerySet(self.model, using=self._db)
+
+    def available(self):
+        return self.get_queryset().available()
+    
+    def get_interest_product(self, user_interest):
+        return self.get_queryset().get_interest_product(user_interest)
+
+    def filter_products(self, **kwargs):
+        return self.get_queryset().filter_products(**kwargs)
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)

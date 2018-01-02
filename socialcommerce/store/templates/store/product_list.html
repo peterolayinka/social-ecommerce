@@ -5,6 +5,10 @@
     <ul class="ca bkt bku abk">
         {% for product in product_list %}
             {% include 'store/product_item_template.html' %}
+        {% empty %}
+            <li class="oq b acx product-item">
+                There is no product of interest to you at the moment. Either update your interest or wait till we have products for you.
+            </li>
         {% endfor %}
     </ul>
 </div>
