@@ -41,6 +41,9 @@
                         <div class="message-box">
                             {% if message_items %}
                             <h3 class="message-content__title" style="font-size:13px">Conversation with {{receipient.get_full_name}}</h3>
+                            {% with online=receipient.last_login|timesince %}
+                                                <strong>last seen:</strong> {% if online|slugify == "0-minutes" %}Online{% else %}{{ online }}{% endif %}
+                                                {% endwith %}
                             <ul class="message-container row">
                                 {% for message in message_items %}
                                 <li class="row message-content__item {% if message.from_store %}left-message__content{% else %}right-message__content{% endif %}">

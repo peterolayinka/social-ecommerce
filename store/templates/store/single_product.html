@@ -27,7 +27,16 @@
             {% else %}
                 <img class="bkp ru uk abc" src="{% static 'img/no-product-image.png' %}">
             {% endif %}
-            Store: <strong>{{product.store.name}}</strong> <a href="{% url 'message:start_chat' product.store.id %}"><button class="btn btn-primary">Chat</button></a>
+            Store: <strong>{{product.store.name}}</strong> 
+            <a href="{% url 'message:start_chat' product.store.id %}">
+                <button class="btn btn-primary">Chat</button> 
+            </a>
+            <div>
+                <br>
+                {% with online=product.store.owner.last_login|timesince %}
+                <strong>last seen:</strong> {% if online|slugify == "0-minutes" %}Online{% else %}{{ online }}{% endif %}
+                {% endwith %}
+            </div>
         </div>
         <br>
         <br>

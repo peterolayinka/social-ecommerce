@@ -43,6 +43,11 @@
                                         <div class="message-box">
                                             {% if receipient %}
                                             <h3 class="message-content__title">Conversation with {{receipient.name}}</h3>
+                                            <span class="message__online-status">
+                                                {% with online=receipient.owner.last_login|timesince %}
+                                                <strong>last seen:</strong> {% if online|slugify == "0-minutes" %}Online{% else %}{{ online }}{% endif %}
+                                                {% endwith %}
+                                            </span>
                                             <ul class="message-container row">
                                                 {% for message in message_items %}
                                                 <li class="row message-content__item {% if request.user == message.user_from %}left-message__content{% else %}right-message__content{% endif %}">
