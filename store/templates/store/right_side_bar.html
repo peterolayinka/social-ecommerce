@@ -2,7 +2,7 @@
 
 <div class="fj">
     {% for message in messages %}
-    <div class="alert oj alert-dismissible ro sp" role="alert">
+    <div class="alert alert-dismissible ro sp {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>

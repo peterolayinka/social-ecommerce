@@ -28,6 +28,9 @@ def cart_add(request, product_id):
         else:
             messages.success(
                 request, f'<strong>{product.name}</strong> was successfully added to cart.')
+    else:
+        messages.error(
+            request, 'An error occurred.')
     return redirect('cart:cart_detail')
 
 def cart_remove(request, product_id):

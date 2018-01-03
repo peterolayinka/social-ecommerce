@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from store.models import Category
@@ -12,13 +14,15 @@ User = get_user_model()
 
 # Create your views here.
 
-class ProfileDetailView(generic.DetailView):
+
+class ProfileDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = 'account/profile.html'
 
     def get_object(self):
         return get_object_or_404(User, username=self.kwargs.get('username'))
 
+@login_required
 def edit_profile(request, username):
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)

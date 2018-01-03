@@ -72,7 +72,11 @@ def store_orders(request):
 
 @login_required
 def store_create(request):
-    store = request.user.store_owned
+    try:
+        store = request.user.store_owned
+    except:
+        store = None
+        
     if store:
         store_form = StoreForm(instance=store)
     else:
@@ -85,15 +89,17 @@ def store_create(request):
             store_form = StoreForm(request.POST, files=request.FILES)
 
         if store_form.is_valid():
-            store = store_form.save(commit=False)
-            store.owner = request.user
-            store.save()
+            new_store = store_form.save(commit=False)
+            new_store.owner = request.user
+            new_store.save()
+            if not store:
+                messages.success(request, 'Store successfully created')
+                return redirect(reverse('store:store_orders'))
+            else:
+                messages.success(request, "Store successfully updated")
+        else:
+            messages.error(request, 'Please fill all form entries.')
 
-        if not store:
-            messages.success(request, 'Store successfully created')
-            return redirect(reverse('store:store_orders'))
-
-        messages.success(request, "Store successfully updated")
     return render(request, 'store/edit_store.html', {'store_form': store_form})
 
 @login_required
