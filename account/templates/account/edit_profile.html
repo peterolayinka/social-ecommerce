@@ -50,7 +50,7 @@
                             {% if profile_form.about.errors %}
                                 {{profile_form.about.errors}}
                             {% endif %}
-                            <textarea class="form-control" type="text" name="about" id="about">{{ profile_form.about.value }}</textarea>
+                            <textarea class="form-control" type="text" name="about" id="about">{% if profile_form.about.value %}{{ profile_form.about.value }}{% endif %}</textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -59,7 +59,7 @@
                             {% if profile_form.address.errors %}
                                 {{profile_form.address.errors}}
                             {% endif %}
-                            <input class="form-control" value="{{ profile_form.address.value }}" type="text" name="address" id="address">
+                            <input class="form-control" value="{% if profile_form.address.value %}{{ profile_form.address.value }}{% endif %}" type="text" name="address" id="address">
                         </div>
                     </div>
                     <div class="form-group">
@@ -68,16 +68,16 @@
                             {% if profile_form.city.errors %}
                                 {{profile_form.city.errors}}
                             {% endif %}
-                            <input class="form-control" value="{{ profile_form.city.value }}" type="text" name="city" id="city">
+                            <input class="form-control" value="{% if profile_form.city.value %}{{ profile_form.city.value }}{% endif %}" type="text" name="city" id="city">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="postal-code" class="col-2 col-form-label">Postal Code</label>
+                        <label for="telephone" class="col-2 col-form-label">Telephone</label>
                         <div class="col-10">
                             {% if profile_form.telephone.errors %}
                                 {{profile_form.telephone.errors}}
                             {% endif %}
-                            <input class="form-control" value="{{ profile_form.telephone.value }}" type="text" name="telephone" id="postal-code">
+                            <input class="form-control" value="{% if profile_form.telephone.value %}{{ profile_form.telephone.value }}{% endif %}" type="text" name="telephone" id="telephone">
                         </div>
                     </div>
                     {% csrf_token %}
