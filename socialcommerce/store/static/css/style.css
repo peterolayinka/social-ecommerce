@@ -358,3 +358,6 @@ a.g.mb i {
 .mw-wrap {
     width: 100% !important;
 }
+.coord {
+    font-size: 10px;
+}

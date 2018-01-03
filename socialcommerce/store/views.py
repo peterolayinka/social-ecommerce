@@ -150,6 +150,8 @@ class SearchView(generic.ListView):
         context['q'] = self.query_data.get('q')
         context['c'] = self.query_data.get('c')
         context['l'] = self.query_data.get('l')
+        context['lat'] = self.query_data.get('lat')
+        context['lon'] = self.query_data.get('lon')
         context['categories'] = Category.objects.all()
         return context
 

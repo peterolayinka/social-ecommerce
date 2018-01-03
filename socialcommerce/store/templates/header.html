@@ -56,7 +56,9 @@
             <input class="form-control" data-action="grow" {% if q %} value="{{q}}"{% endif %} name="q" placeholder="Search" type="text">
             <input type="hidden" name="c" value="{% if c %}{{ c }}{% else %}all{% endif %}">
             {% if l %}
-                <input type="hidden" name="c" value="{{ l }}">
+                <input type="hidden" name="l" value="{{ l }}">
+                <input id="id_latitude" name="lat" value="{% if lat %}{{lat}}{% endif %}" type="hidden">
+                <input id="id_longitude" name="lon" value="{% if lon %}{{lon}}{% endif %}" type="hidden">
             {% endif %}
         </form>
         <ul id="#js-popoverContent" class="nav navbar-nav zc aah ro sk">
