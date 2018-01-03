@@ -12,7 +12,7 @@ from .forms import StoreForm, ProductForm
 # Create your views here.
 
 def index(request):
-    # form = 
+    form = CartAddProductForm()
     if request.user.is_authenticated:
         if request.POST:
             interest = InterestForm(data=request.POST)
@@ -29,7 +29,8 @@ def index(request):
         product_list = Product.available_products.all()
     context = {
         'product_list': product_list,
-        'categories': Category.objects.all()
+        'categories': Category.objects.all(),
+        'form': form,
     }
     return render(request, 'store/index.html', context)
 
