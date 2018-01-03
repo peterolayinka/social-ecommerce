@@ -46,7 +46,7 @@ class AvailableProductQuerySet(models.QuerySet):
         lat = kwargs['query'].get('lat')
         lon = kwargs['query'].get('lon')
         if lon and lat:
-            location = Point(int(lon), int(lat), srid=4326)
+            location = Point(float(lon), float(lat), srid=4326)
         # import pdb; pdb.set_trace()
         data = self.filter(models.Q(name__icontains=q) | models.Q(description__icontains=q))
 
