@@ -361,3 +361,15 @@ a.g.mb i {
 .coord {
     font-size: 10px;
 }
+.brand {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+.blue-color {
+    color: rgb(48, 151, 209);
+}
+.font-35 {
+    font-size: 35px;
+}
