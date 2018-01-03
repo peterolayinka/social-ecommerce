@@ -1,4 +1,6 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
+from django.contrib.gis.db.models.functions import Distance
 from django.contrib.auth import get_user_model
 
 
@@ -41,13 +43,17 @@ class AvailableProductQuerySet(models.QuerySet):
         q = kwargs['query'].get('q')
         ql = kwargs['query'].get('l')
         qc = kwargs['query'].get('c')
-
+        lat = kwargs['query'].get('lat')
+        lon = kwargs['query'].get('lon')
+        if lon and lat:
+            location = Point(int(lon), int(lat), srid=4326)
+        # import pdb; pdb.set_trace()
         data = self.filter(models.Q(name__icontains=q) | models.Q(description__icontains=q))
 
         if qc != 'all':
             return data.filter(category__slug=qc)
         if ql == 'nearby_store':
-            return data
+            return data.annotate(distance=Distance('location', location)).order_by('distance')
         else:
             return data
 
@@ -84,6 +90,7 @@ class Product(models.Model):
     available_products = AvailableProductManager()
 
     class Meta:
+        ordering = ('-created',)
         index_together = (('id', 'slug'),)
     
     def __str__(self):

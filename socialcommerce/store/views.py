@@ -143,7 +143,6 @@ class SearchView(generic.ListView):
 
     def get_queryset(self):
         self.query_data = self.request.GET
-        # import pdb; pdb.set_trace()
         return Product.available_products.filter_products(query=self.query_data)
 
     def get_context_data(self):

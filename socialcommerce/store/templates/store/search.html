@@ -32,6 +32,14 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="latitude">Latitude:</label>
+                        <input id="id_latitude" name="lat" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="longitude">Longitude:</label>
+                        <input id="id_longitude" name="lon" type="text" class="form-control">
+                    </div>
                     <button type="submit" class="btn btn-primary">Sort!</button>
                 </form>
             </div>  
@@ -45,4 +53,14 @@
         {% endfor %}
     </ul>
 </div>
+<script language="javascript" type="text/javascript">
+    navigator.geolocation.getCurrentPosition(function (position){
+        var lat = document.getElementById('id_latitude');
+        var lon = document.getElementById('id_longitude');
+
+        lat.value = position.coords.latitude;
+        lon.value = position.coords.longitude;
+        console.log(position.coords)
+    });
+</script>
 {% endblock %}

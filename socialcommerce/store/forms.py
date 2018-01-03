@@ -3,6 +3,8 @@ import itertools
 from django import forms
 from django.utils.text import slugify
 
+from mapwidgets.widgets import GooglePointFieldWidget
+
 from .models import Store, Product, Category
 
 class StoreForm(forms.ModelForm):
@@ -14,7 +16,10 @@ class ProductForm(forms.ModelForm):
     category = forms.CharField()
     class Meta:
         model = Product
-        fields = ['name', 'description', 'image', 'processing_time', 'price', 'available']
+        fields = ['name', 'description', 'image', 'processing_time', 'location', 'price', 'available']
+        widgets = {
+            'location': GooglePointFieldWidget,
+        }
 
     def save(self, commit=True, **kwargs):
         if self.instance.pk:

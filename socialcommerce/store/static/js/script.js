@@ -118,3 +118,19 @@ if ($('.jsSendMessage').html() != undefined ) {
         })
     }, 2000);
 }
+$(document).ready(function(){
+    $(".jsCoord").each(function (index) {
+        console.log(index + ": " + $(this).text());
+        element = $(this)
+        coord = element.text().replace('(', '').replace(')', '').split(',');
+        element.html()
+        $.ajax({
+            url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + coord[1] + ',' + coord[0] + '&sensor=true',
+            type: "get",
+            async: false,
+            success: function (res) {
+                element.text(res.results[0].formatted_address)
+            }
+        })
+    });
+})

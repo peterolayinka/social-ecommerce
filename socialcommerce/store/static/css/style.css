@@ -353,3 +353,8 @@ a.g.mb i {
     border-color: #dddfe2;
 }
 /* //bootstrap */
+
+/* django map widet */
+.mw-wrap {
+    width: 100% !important;
+}
