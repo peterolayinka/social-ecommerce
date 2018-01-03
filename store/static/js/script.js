@@ -125,7 +125,7 @@ $(document).ready(function(){
         coord = element.text().replace('(', '').replace(')', '').split(',');
         element.html()
         $.ajax({
-            url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + coord[1] + ',' + coord[0] + '&sensor=true',
+            url: '//maps.googleapis.com/maps/api/geocode/json?latlng=' + coord[1] + ',' + coord[0] + '&sensor=true',
             type: "get",
             async: false,
             success: function (res) {
