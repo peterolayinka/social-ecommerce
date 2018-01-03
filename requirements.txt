@@ -14,3 +14,4 @@ psycopg2==2.7.3.2
 pycodestyle==2.3.1
 pytz==2017.3
 static3==0.7.0
+whitenoise==3.3.1
