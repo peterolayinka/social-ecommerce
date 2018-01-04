@@ -65,6 +65,9 @@
             <div class="form-group">
                 <label for="processing_time" class="col-2 col-form-label">Location:</label>
                 <div class="col-10">
+                    {% if product_form.location.errors %}
+                        {{product_form.location.errors}}
+                    {% endif %}
                     {{product_form.location}}
                 </div>
             </div>

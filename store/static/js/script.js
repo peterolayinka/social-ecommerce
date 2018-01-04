@@ -125,11 +125,14 @@ $(document).ready(function(){
         coord = element.text().replace('(', '').replace(')', '').split(',');
         element.html()
         $.ajax({
-            url: '//maps.googleapis.com/maps/api/geocode/json?latlng=' + coord[1] + ',' + coord[0] + '&sensor=true',
+            url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coord[1] + ',' + coord[0] + '&sensor=true&key=AIzaSyAxsrulrQnEC1gRuZnOm1V1vROrIyOcx08',
             type: "get",
             async: false,
             success: function (res) {
+                console.log(res)
                 element.text(res.results[0].formatted_address)
+            },
+            error: function(res){
             }
         })
     });
