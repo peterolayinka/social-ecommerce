@@ -53,29 +53,39 @@ def single_message(request, receipient_id, message_list=None):
             message_items = Message.objects.filter(Q(
                 message_list_id=message_list, user_from=receipient) | 
                 Q(message_list_id=message_list, user_to=receipient))
-            unread_messages = Message.objects.filter(message_list_id=message_list, store=request.user.store_owned)
+            unread_messages = Message.objects.filter(message_list_id=message_list, store=request.user.store_owned, store_read=False)
+            # message_list.store_read = True
         else:
             message_items = Message.objects.filter(
                 message_list_id=message_list, store=receipient)
-            unread_messages = Message.objects.filter(Q(message_list_id=message_list, user_from=request.user) | Q(
-                message_list_id=message_list, user_to=request.user))
+            unread_messages = Message.objects.filter(Q(message_list_id=message_list, user_from=request.user, user_from_read=False) | Q(
+                message_list_id=message_list, user_to=request.user, user_to_read=False))
+
+            # if message_list.user_to == request.user:
+            #     message_list.user_to_read = True
+            # elif message_list.user_from == request.user:
+                # message_list.user_from_read = True
+
+        # message_list.save()
 
         for message in unread_messages:
             if request.user == message.user_from:
                 message.user_from_read = True
             elif 'store' in request.path:
+                import pdb; pdb.set_trace()
                 message.store_read = True
             else:
                 message.user_to_read = True
             message.save()
 
-        if unread_messages:
-            message_list_read = unread_messages.first().message_list
-            if request.user == message.user_from:
-                message_list_read.user_from_read = True
-            elif 'store' in request.path:
-                message_list_read.store_read = True
-            message_list_read.save()
+        message_list_obj = message_items.first().message_list
+        if request.user == message_list_obj.user_from and message_list_obj.user_from_read == False:
+            message_list_obj.user_from_read = True
+        elif 'store' in request.path and message_list_obj.store_read == False:
+            message_list_obj.store_read = True
+        elif request.user == message_list_obj.user_to and message_list_obj.user_to_read == False:
+            message_list_obj.user_to_read = True            
+        message_list_obj.save()
     
     if 'store' in request.path:
         message_template_name = 'message/store_message.html'
@@ -127,9 +137,11 @@ def send_message(request, receipient_id=None, message_list_id=None):
 
     if 'store' in request.path:
         message = Message.objects.create(user_to_id=data['user-id'], store_id=data['store-id'], message_list=message_list, content=data['message'], from_store=True)
+        message_list.user_from_read = False
     else:
         message = Message.objects.create(user_from=request.user, store_id=data['store-id'], message_list=message_list, content=data['message'])
-    message_list.store_read = False
+        message_list.store_read = False
+    
     message_list.created = timezone.now()
     message_list.save()
     return JsonResponse({'status': True})

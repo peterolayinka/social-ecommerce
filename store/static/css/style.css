@@ -7,11 +7,21 @@ a.g.mb i {
 .navbar-nav .mb {
     padding: 0.5rem 1rem;
 }
+.md {
+    position: relative;
+}
 .main-dashboard-page__col{
     -webkit-box-flex: 0;
     -ms-flex: 0 0 75%;
     flex: 0 0 75%;
     max-width: 75%;
+}
+.header-notify {
+    font-size: 12px;
+    color: #fff;
+    position: absolute;
+    top: -8px;
+    right: 0;
 }
 /* message */
 .message-box__container {

@@ -3,11 +3,19 @@
         {% if request.user.store_owned %}
         <a href="{% url 'store:store_orders' %}" class="b os ru tw">
             <span>Orders</span>
-            <span class="h aub"></span>
+             {% if awaiting_order_count %}
+            <span class="h aub text-danger">{{awaiting_order_count}}</span>
+            {% else %}
+            <span class="h aub "></span>
+            {% endif %}
         </a>
         <a href="{% url 'store:store_messages' %}" class="b os ru tw">
             <span>Messages</span>
-            <span class="h aub"></span>
+             {% if store_message_count %}
+            <span class="h aub text-danger">{{store_message_count}}</span>
+            {% else %}
+            <span class="h aub "></span>
+            {% endif %}
         </a>
         <a href="{% url 'store:add_product' %}" class="b os ru tw">
             <span>Add Product</span>

@@ -27,9 +27,15 @@
             </li>
             <li class="md">
                 <a class="mb" href="{% url 'message:message_list' %}">Messages</a>
+                 {% if user_message_count %}
+                <span class="header-notify">{{user_message_count}}</span>
+                {% endif %}
             </li>
             <li class="md">
                 <a class="mb" href="{% url 'store:store_orders' %}">My Store</a>
+                {% if store_activity_count > 0 %}
+                <span class="header-notify">{{store_activity_count}}</span>
+                {% endif %}
             </li>
             <li class="md">
                 <a class="mb" href="{% url 'cart:user_orders' %}">My Order</a>
